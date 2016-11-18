@@ -45,7 +45,6 @@ $app->post("/user/",function() use($app) {
 	$apellido = $objDatos->apellido;
 	$correo = $objDatos->correo;
 	$contra = $objDatos->contra;
-	$celular = $objDatos->celular;
 	$tipo = $objDatos->tipo;
 
 	try {
@@ -55,11 +54,10 @@ $app->post("/user/",function() use($app) {
 		$contra = md5($salt.$contra);
 		$contra = sha1($salt.$contra);
 
-		$result = $conex->prepare("CALL pInsertUser('$nombre','$apellido','$correo','$contra','$celular','$tipo');");
+		$result = $conex->prepare("CALL pInsertUser('$nombre','$apellido','$correo','$contra','$tipo');");
 
 		$result->execute();
 		$res = $result->fetchObject();
-		//$res = array('response'=>'success');
 
 		$conex = null;
 
@@ -124,8 +122,8 @@ $app->delete('/user/:id',function($id) use($app) {
 $app->post("/login/",function() use($app) {
 	$objDatos = json_decode(file_get_contents("php://input"));
 
-	$correo = $objDatos->email;
-	$contra = $objDatos->pass;
+	$correo = $objDatos->correo;
+	$contra = $objDatos->contra;
 
 	try {
 		$conex = getConex();

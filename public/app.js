@@ -17,6 +17,20 @@ mainApplicationModule.config(['cfpLoadingBarProvider', function(cfpLoadingBarPro
     cfpLoadingBarProvider.includeSpinner = true;
 }]);
 
+mainApplicationModule.run(function($rootScope,$location,sessionService,loginService) {
+	var routespermission = ['/','/login','/admin','/user'];
+	$rootScope.$on('$routeChangeStart',function() {
+		if( routespermission.indexOf($location.path()) != -1 && loginService.isLogged() ) {
+			if( sessionService.get('user') == 'admin' )
+				$rootScope.c_admin = true;
+			if( sessionService.get('user') == 'user' )
+				$rootScope.c_user = true;
+			console.log($rootScope.c_admin);
+			console.log($rootScope.c_user);
+		}
+	});
+});
+
 
 angular.element(document).ready(function() {
 	angular.bootstrap(document, [mainApplicationModuleName]);

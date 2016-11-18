@@ -15,7 +15,7 @@
 
 	angular.module('mainModule').factory('loginService',function ($http,$location,sessionService,$rootScope) {
 		return {
-			login: function(user,scope) {
+			login: function(user) {
 				var $promise = $http.post('rest/v1/login',user);
 				$promise.then(function(res){
 					console.log(res);
@@ -31,8 +31,7 @@
 							$location.path('/admin');
 						}
 					} else {
-						scope.msgtxt = 'Error Information';
-						$location.path('/usuario');
+						$location.path('/login');
 					}
 				});
 			},
@@ -42,6 +41,12 @@
 				$rootScope.c_user = false;
 
 				$location.path('/');
+			},
+			isLogged: function() {
+				if( sessionService.get('user') )
+					return true;
+				else
+					return false;
 			}
 		};
 	});
