@@ -8,8 +8,9 @@
 			/*$scope.c_user = false;
 			$scope.c_admin = false;*/
 
-			$scope.create = function() {
-				console.log(this.key);
+			$scope.create = function(user) {
+				console.log(user);
+				/*console.log(this.key);
 				var user = {
 					email: this.email,
 					pass: this.pass
@@ -41,7 +42,7 @@
 				});
 
 				console.log(user);
-				loginService.login(user,$scope);
+				loginService.login(user,$scope);*/
 
 			};
 			$scope.ingresar = function(user) {

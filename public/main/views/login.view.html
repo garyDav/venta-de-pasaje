@@ -68,35 +68,35 @@
           <!-- Sign up -->
           <div class="card-panel login">
             <div class="row">
-              <form ng-submit="create();">
+              <form ng-submit="create(user);" name="new">
                     <!-- nombre completo -->
                     <div class="input-field col s10 offset-s1">
                       <i class="material-icons prefix">account_circle</i>
-                       <input  id="nombre" type="text" class="validate" ng-model="nombre">
+                       <input id="nombre" type="text" class="validate" ng-model="user.nombre" required>
                         <label for="nombre">Nombre</label>
                     </div>
                     <!-- nombre usuario -->
                     <div class="input-field col s10 offset-s1">
                       <i class="material-icons prefix">account_circle</i>
-                       <input  id="apellido" type="text" class="validate" ng-model="apellido">
+                       <input  id="apellido" type="text" class="validate" ng-model="user.apellido" required>
                           <label for="apellido">Apellido</label>
                     </div>
                     <!-- empresa -->
                     <div class="input-field col s10 offset-s1">
                       <i class="material-icons prefix">assessment</i>
-                       <input  id="empresa" type="text" class="validate" ng-model="empresa">
+                       <input  id="empresa" type="text" class="validate" ng-model="user.empresa" required>
                           <label for="empresa">Empresa</label>
                     </div>
                     <!-- email -->
                     <div class="input-field col s10 offset-s1">
                       <i class="material-icons prefix">email</i>
-                       <input  id="email" type="email" class="validate" ng-model="correo">
+                       <input  id="email" type="email" class="validate" ng-model="user.correo" required>
                         <label for="email">Correo</label>
                     </div>  
                     <!-- password -->
                     <div class="input-field col s10  offset-s1">
                       <i class="material-icons prefix">lock</i>
-                       <input  id="password" type="password" class="validate" ng-model="contra">
+                       <input  id="password" type="password" class="validate" ng-model="user.contra" required>
                         <label for="password">Contraseña</label>
                     </div>
                 <div ng-show="mensaje" class="row">
@@ -105,7 +105,7 @@
                   </div>
                 </div>
                 <center>
-                  <button type="submit" class="btn center waves-effect waves-light blue">Registrar</button>
+                  <button type="submit" class="btn center waves-effect waves-light blue" ng-disabled="new.$invalid">Registrar <i class="material-icons right">send</i></button>
                 </center>
               </form>
             </div>
