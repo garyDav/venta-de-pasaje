@@ -3,7 +3,7 @@
 
 //Variable global mainApplicationModuleName donde carga el modulo principal
 var mainApplicationModuleName = 'ventaPasajes';
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','mainModule','busModule','choferModule','pasajesModule','viajesModule','LocalStorageModule','angular-loading-bar','ngAnimate']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','mainModule','busModule','choferModule','clienteModule','pasajesModule','viajesModule','LocalStorageModule','angular-loading-bar','ngAnimate']);
 
 mainApplicationModule.config(['$locationProvider',function($locationProvider) {
 	$locationProvider.html5Mode(true);
@@ -18,7 +18,7 @@ mainApplicationModule.config(['cfpLoadingBarProvider', function(cfpLoadingBarPro
 }]);
 
 mainApplicationModule.run(function($rootScope,$location,sessionService,loginService) {
-	var routespermission = ['/','/login','/admin','/user','/bus','/bus/:id','/choferes','/choferes/:id','/pasajes','/pasajes/:id','/viajes','/viajes/:id'];
+	var routespermission = ['/','/login','/admin','/user','/bus','/bus/:id','/choferes','/choferes/:id','/pasajes','/pasajes/:id','/viajes','/viajes/:id','/clientes','/clientes/:id'];
 	$rootScope.$on('$routeChangeStart',function() {
 		if( routespermission.indexOf($location.path()) != -1 && loginService.isLogged() ) {
 			if( sessionService.get('user') == 'admin' )

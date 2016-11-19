@@ -4,10 +4,10 @@
 	angular.module('clienteModule').config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
-				when('/cliente',{
+				when('/clientes',{
 					templateUrl: 'public/cliente/views/list-cliente.view.html'
 				}).
-				when('/cliente/:id',{
+				when('/clientes/:id',{
 					templateUrl: 'public/cliente/views/edit-cliente.view.html'
 				});
 		}
