@@ -25,8 +25,8 @@ mainApplicationModule.run(function($rootScope,$location,sessionService,loginServ
 				$rootScope.c_admin = true;
 			if( sessionService.get('user') == 'user' )
 				$rootScope.c_user = true;
-			console.log($rootScope.c_admin);
-			console.log($rootScope.c_user);
+			/*console.log($rootScope.c_admin);
+			console.log($rootScope.c_user);*/
 		}
 	});
 });
