@@ -15,7 +15,7 @@
 
 	angular.module('mainModule').factory('loginService',function ($http,$location,sessionService,$rootScope) {
 		return {
-			login: function(user) {
+			login: function(user,scope) {
 				var $promise = $http.post('rest/v1/login',user);
 				$promise.then(function(res){
 					console.log(res);
@@ -31,6 +31,7 @@
 							$location.path('/admin');
 						}
 					} else {
+						scope.msglogin = res.data.error;
 						$location.path('/login');
 					}
 				});

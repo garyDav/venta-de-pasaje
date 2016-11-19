@@ -1,11 +1,14 @@
 (function(angular){
 	'use strict';
 
-	angular.module('mainModule').config(['$routeProvider',
+	angular.module('choferModule').config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
-				when('/',{
-					templateUrl: 'public/main/views/principal.view.html'
+				when('/choferes',{
+					templateUrl: 'public/chofer/views/list-chofer.view.html'
+				}).
+				when('/choferes/:id',{
+					templateUrl: 'public/chofer/views/edit-chofer.view.html'
 				});
 		}
 	]);

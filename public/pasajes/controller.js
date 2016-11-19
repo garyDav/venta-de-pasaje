@@ -1,6 +1,6 @@
 (function(angular){
 	'use strict';
-	angular.module('mainModule').controller('mainCtrl',['$scope',
+	angular.module('pasajesModule').controller('pasajesCtrl',['$scope',
 		function($scope) {
 		}
 	]);

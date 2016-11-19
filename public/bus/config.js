@@ -1,11 +1,14 @@
 (function(angular){
 	'use strict';
 
-	angular.module('mainModule').config(['$routeProvider',
+	angular.module('busModule').config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
-				when('/',{
-					templateUrl: 'public/main/views/principal.view.html'
+				when('/bus',{
+					templateUrl: 'public/bus/views/list-bus.view.html'
+				}).
+				when('/bus/:id',{
+					templateUrl: 'public/bus/views/edit-bus.view.html'
 				});
 		}
 	]);

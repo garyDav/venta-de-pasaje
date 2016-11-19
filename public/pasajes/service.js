@@ -1,9 +1,9 @@
 (function(angular) {
 
 	'use strict';
-	angular.module('mainModule').factory('usuarioService',['$resource',
+	angular.module('pasajesModule').factory('pasajesService',['$resource',
 		function($resource) {
-			return $resource('rest/v1/user/:id', {
+			return $resource('rest/v1/pasajes/:id', {
 				id: '@id'
 			}, {
 				update: {

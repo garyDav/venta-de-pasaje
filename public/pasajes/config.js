@@ -1,11 +1,14 @@
 (function(angular){
 	'use strict';
 
-	angular.module('mainModule').config(['$routeProvider',
+	angular.module('pasajesModule').config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
-				when('/',{
-					templateUrl: 'public/main/views/principal.view.html'
+				when('/pasajes',{
+					templateUrl: 'public/pasajes/views/list-pasajes.view.html'
+				}).
+				when('/pasajes/:id',{
+					templateUrl: 'public/pasajes/views/edit-pasajes.view.html'
 				});
 		}
 	]);

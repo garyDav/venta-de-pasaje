@@ -3,6 +3,7 @@
 	angular.module('mainModule').controller('mainCtrl',['$scope','usuarioService','loginService','sessionService','$rootScope',
 		function($scope,usuarioService,loginService,sessionService,$rootScope) {
 			$scope.mensaje = '';
+			$scope.msglogin = '';
 
 			/*$scope.c_user = false;
 			$scope.c_admin = false;*/
@@ -30,7 +31,7 @@
 			};
 			$scope.ingresar = function(user) {
 				console.log(user);
-				loginService.login(user);
+				loginService.login(user,$scope);
 			};
 			$scope.logout = function() {
 				console.log('entra logout');

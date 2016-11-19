@@ -1,6 +1,6 @@
 (function(angular){
 	'use strict';
-	angular.module('mainModule').controller('mainCtrl',['$scope',
+	angular.module('choferModule').controller('choferCtrl',['$scope',
 		function($scope) {
 		}
 	]);

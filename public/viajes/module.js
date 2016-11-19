@@ -4,6 +4,6 @@
 	'use strict';
 
 	//Creamos el modulo 'mainModule'
-	angular.module('mainModule', []);
+	angular.module('viajesModule', []);
 
 })(window.angular);

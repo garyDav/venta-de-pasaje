@@ -1,0 +1,39 @@
+pasajes:
+  chofer:
+    ☐ id
+    ☐ ci
+    ☐ nombre
+    ☐ apellido
+    ☐ categoria
+    ☐ descripcion
+    ☐ fecha
+  viaje:
+    ☐ id
+    ☐ id_chofer
+    ☐ id_bus
+    ☐ horario
+    ☐ origen
+    ☐ destino
+    ☐ fecha
+  bus:
+    ☐ id
+    ☐ placa
+    ☐ marca
+    ☐ modelo
+    ☐ cilindrada
+    ☐ motor
+    ☐ combustible
+    ☐ capacidad
+    ☐ num_puertas
+    ☐ tipo
+    ☐ fecha
+  pasaje:
+    ☐ id
+    ☐ id_viaje
+    ☐ num_asiento
+    ☐ fecha
+  cliente:
+    ☐ id
+    ☐ ci
+    ☐ nombre
+    ☐ apellido
