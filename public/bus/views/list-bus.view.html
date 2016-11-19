@@ -19,20 +19,44 @@
 					<form class="col s12" name="form1">
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="nombre" type="text" class="validate" ng-model="lugar.nombre" required>
-								<label for="nombre">Nombre</label>
+								<input id="v_placa" type="text" class="validate" ng-model="new.placa" required>
+								<label for="v_placa">Placa </label>
 							</div>
 							<div class="input-field col s12">
-								<textarea id="descripcion" class="materialize-textarea validate" ng-model="lugar.descripcion" required></textarea>
-								<label for="descripcion">Descripcion</label>
+								<input id="v_marca" type="text" class="validate" ng-model="new.marca" required>
+								<label for="v_marca">Marca </label>
 							</div>
 							<div class="input-field col s12">
-								<input id="tipo" type="text" class="validate" ng-model="lugar.tipo" required>
-								<label for="tipo">tipo</label>
+								<input id="v_modelo" type="text" class="validate" ng-model="new.modelo" required>
+								<label for="v_modelo">Modelo </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="v_cilindrada" type="text" class="validate" ng-model="new.cilindrada" required>
+								<label for="v_cilindrada">Cilindrada </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="v_motor" type="text" class="validate" ng-model="new.motor" required>
+								<label for="v_motor">Motor </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="v_combustible" type="text" class="validate" ng-model="new.combustible" required>
+								<label for="v_combustible">Combustible </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="v_capacidad" type="text" class="validate" ng-model="new.capacidad" required>
+								<label for="v_capacidad">Capacidad </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="v_num_puertas" type="number" class="validate" ng-model="new.num_puertas" required>
+								<label for="v_num_puertas">Número de puertas </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="v_tipo" type="text" class="validate" ng-model="new.tipo" required>
+								<label for="v_tipo">Tipo de Bus </label>
 							</div>
 							<div class="row center">
 								<div class="col s12 m6">
-									<a class="waves-effect waves-light btn" ng-click="guardar(lugar);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
+									<a class="waves-effect waves-light btn" ng-click="save(new);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
 								</div>
 								<div class="col s12 m6">
 									<a class="waves-effect waves-light btn red darken-4" ng-click="cancelar();"><i class="material-icons left">clear_all</i>Cancelar</a>
@@ -62,19 +86,35 @@
 						<table class="bordered highlight responsive-table">
 							<thead>
 								<tr>
-									<th>Nombre</th>
-									<th>Descripcion</th>
+									<th>Placa</th>
+									<th>Marca</th>
+									<th>Modelo</th>
+									<th>Cilindrada</th>
+									<th>Motor</th>
+									<th>Combustible</th>
+									<th>Capacidad</th>
+									<th>Num. de puertas</th>
 									<th>Tipo</th>
-									<th>Eliminar</th>
+									<th>Fecha</th>
+									<th>Acciones</th>
 								</tr>
 							</thead>
 							<tbody>
 								<!--<tr ng-repeat="g in garra | orderBy:'nombre':'reverse'">-->
-								<tr ng-repeat="g in garra | orderBy:'nombre'">
-									<td>{{g.nombre}} </td>
-									<td>{{g.descripcion}} </td>
-									<td>{{g.tipo}} </td>
-									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(g.id);"><i class="material-icons left">delete</i></a></td>
+								<tr ng-repeat="d in data | orderBy:'Placa'">
+									<td>{{d.placa}} </td>
+									<td>{{d.marca}} </td>
+									<td>{{d.modelo}} </td>
+									<td>{{d.cilindrada}} </td>
+									<td>{{d.motor}} </td>
+									<td>{{d.combustible}} </td>
+									<td>{{d.capacidad}} </td>
+									<td>{{d.num_puertas}} </td>
+									<td>{{d.tipo}} </td>
+									<td>{{d.fecha}} </td>
+
+									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(d.id);"><i class="material-icons left">delete</i></a></td>
+									<td><a class="waves-effect waves-light btn-floating grey darken-4" ng-click="edit(d.id);"><i class="material-icons left">mode_edit</i></a></td>
 								</tr>
 							</tbody>
 						</table>

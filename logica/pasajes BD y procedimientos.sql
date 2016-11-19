@@ -119,7 +119,7 @@ CREATE PROCEDURE pInsertChofer (
 )
 BEGIN
 	INSERT INTO user VALUES(null,v_ci,v_nombre,v_apellido,v_categoria,v_descripcion,CURRENT_TIMESTAMP);
-	SELECT @@identity AS id,fecha,'success' AS error;
+	SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,'success' AS error;
 END //
 
 DROP PROCEDURE IF EXISTS pInsertBus;
@@ -137,7 +137,7 @@ CREATE PROCEDURE pInsertBus (
 BEGIN
 	IF NOT EXISTS(SELECT id FROM bus WHERE placa LIKE v_placa) THEN
 		INSERT INTO bus VALUES(null,v_placa,v_marca,v_modelo,v_cilindrada,v_motor,v_combustible,v_capacidad,v_num_puertas,v_tipo,CURRENT_TIMESTAMP);
-		SELECT @@identity AS id,fecha,'success' AS error;
+		SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,'success' AS error;
 	ELSE
 		SELECT 'Error: placa ya registrada' error;
 	END IF;
@@ -153,7 +153,7 @@ CREATE PROCEDURE pInsertViaje (
 )
 BEGIN
 	INSERT INTO viaje VALUES(null,v_id_chofer,v_id_bus,v_horario,v_origen,v_destino,CURRENT_TIMESTAMP);
-	SELECT @@identity AS id,fecha,'success' AS error;
+	SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,'success' AS error;
 END //
 
 DROP PROCEDURE IF EXISTS pInsertPasaje;
@@ -164,7 +164,7 @@ CREATE PROCEDURE pInsertPasaje (
 BEGIN
 	IF NOT EXISTS(SELECT id FROM pasaje WHERE id_viaje = v_id_viaje AND num_asiento = v_num_asiento) THEN
 		INSERT INTO pasaje VALUES(null,v_id_viaje,v_num_asiento,CURRENT_TIMESTAMP);
-		SELECT @@identity AS id,fecha,'success' AS error;
+		SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,'success' AS error;
 	ELSE
 		SELECT 'Error: Número de asiento ya ocupado.' error;
 	END IF;
@@ -179,7 +179,7 @@ CREATE PROCEDURE pInsertCliente (
 BEGIN
 	IF NOT EXISTS(SELECT id FROM cliente WHERE ci LIKE v_ci) THEN
 		INSERT INTO cliente VALUES(null,v_ci,v_nombre,v_apellido,CURRENT_TIMESTAMP);
-		SELECT @@identity AS id,fecha, 'success' AS error;
+		SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha, 'success' AS error;
 	ELSE
 		SELECT 'Error: CI ya registrado.' error;
 	END IF;

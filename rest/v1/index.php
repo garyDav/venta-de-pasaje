@@ -15,6 +15,11 @@ define('SPECIALCONSTANT',true);
 require 'models/connect.php';
 
 require 'models/User.php';
+require 'models/Bus.php';
+require 'models/Chofer.php';
+require 'models/Cliente.php';
+require 'models/Pasaje.php';
+require 'models/Viaje.php';
 //end EntidadesRESTFULL
 
 $app->run();
