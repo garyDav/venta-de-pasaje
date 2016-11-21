@@ -19,20 +19,49 @@
 					<form class="col s12" name="form1">
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="nombre" type="text" class="validate" ng-model="lugar.nombre" required>
+								<input id="ci" type="text" class="validate" ng-model="newObj.ci" required>
+								<label for="ci">CI</label>
+							</div>
+							<div class="input-field col s12">
+								<input id="nombre" type="text" class="validate" ng-model="newObj.nombre" required>
 								<label for="nombre">Nombre</label>
 							</div>
 							<div class="input-field col s12">
-								<textarea id="descripcion" class="materialize-textarea validate" ng-model="lugar.descripcion" required></textarea>
-								<label for="descripcion">Descripcion</label>
+								<input id="apellido" type="text" class="validate" ng-model="newObj.apellido" required>
+								<label for="apellido">Apellido</label>
 							</div>
 							<div class="input-field col s12">
-								<input id="tipo" type="text" class="validate" ng-model="lugar.tipo" required>
-								<label for="tipo">tipo</label>
+								<select id="categoria" ng-model="newObj.categoria">
+									<option value="cat-B">Categoria B</option>
+									<option selected value="cat-C">Categoria C</option>
+								</select>
+								<label for="categoria">Categoria</label>
 							</div>
+							<div class="input-field col s12">
+								<input id="fecha_nac" type="text" class="datepicker" ng-model="newObj.fecha_nac">
+								<label for="fecha_nac">Fecha de nacimiento</label>
+							</div>
+							<div class="input-field col s12">
+								<input id="celular" type="number" class="validate" ng-model="newObj.celular" required>
+								<label for="celular">Celular</label>
+							</div>
+							<div class="input-field col s12">
+								<textarea id="descripcion" class="materialize-textarea validate" ng-model="newObj.descripcion" required></textarea>
+								<label for="descripcion">Descripcion</label>
+							</div>
+							<div class="file-field input-field col s12">
+								<div class="btn">
+									<span>Imagen</span>
+									<input type="file" file-model="file">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text" ng-model="newObj.img">
+								</div>
+							</div>
+
 							<div class="row center">
 								<div class="col s12 m6">
-									<a class="waves-effect waves-light btn" ng-click="guardar(lugar);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
+									<a class="waves-effect waves-light btn" ng-click="save(newObj);"><i class="material-icons left">cloud</i>Guardar</a>
 								</div>
 								<div class="col s12 m6">
 									<a class="waves-effect waves-light btn red darken-4" ng-click="cancelar();"><i class="material-icons left">clear_all</i>Cancelar</a>
@@ -62,19 +91,30 @@
 						<table class="bordered highlight responsive-table">
 							<thead>
 								<tr>
-									<th>Nombre</th>
-									<th>Descripcion</th>
-									<th>Tipo</th>
-									<th>Eliminar</th>
+									<th>Foto </th>
+									<th>CI </th>
+									<th>Nombre </th>
+									<th>Apellido </th>
+									<th>Categoria </th>
+									<th>Descripcion </th>
+									<th>Celular </th>
+									<th>Fecha nacimiento </th>
+									<th>Fecha de registro</th>
 								</tr>
 							</thead>
 							<tbody>
 								<!--<tr ng-repeat="g in garra | orderBy:'nombre':'reverse'">-->
-								<tr ng-repeat="g in garra | orderBy:'nombre'">
-									<td>{{g.nombre}} </td>
-									<td>{{g.descripcion}} </td>
-									<td>{{g.tipo}} </td>
-									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(g.id);"><i class="material-icons left">delete</i></a></td>
+								<tr ng-repeat="d in data | orderBy:'fecha':'reverse'">
+									<td><img src="material/photos/{{d.img}}" class="responsive-img" width="45px"> </td>
+									<td>{{d.ci}} </td>
+									<td>{{d.nombre}} </td>
+									<td>{{d.apellido}} </td>
+									<td>{{d.categoria}} </td>
+									<td>{{d.descripcion}} </td>
+									<td>{{d.celular}} </td>
+									<td>{{d.fecha_nac}} </td>
+									<td>{{d.fecha}} </td>
+									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(d.id);"><i class="material-icons left">delete</i></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -85,22 +125,16 @@
 		<div class="col l2 m1"></div>
 	</div>
 
-	<!-- Galeria de imagenes -->
-	<!--<div class="carousel carousel-slider">
-		<a class="carousel-item" href="#one!"><img src="http://lorempixel.com/800/400/city/1"></a>
-		<a class="carousel-item" href="#two!"><img src="http://lorempixel.com/800/400/city/2"></a>
-		<a class="carousel-item" href="#three!"><img src="http://lorempixel.com/800/400/city/3"></a>
-		<a class="carousel-item" href="#four!"><img src="http://lorempixel.com/800/400/city/4"></a>
-	</div>-->
-
-
 </div>
 
 
 <script>
 	$(document).ready(function() {
 		$('input#input_text, textarea#descripcion').characterCounter();
-		//$('.carousel').carousel();
-		$('.carousel.carousel-slider').carousel({full_width: true});
+		$('.datepicker').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 15 // Creates a dropdown of 15 years to control year
+		});
+		$('select').material_select();
 	});
 </script>

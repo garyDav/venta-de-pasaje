@@ -6,6 +6,9 @@ pasajes:
     ☐ apellido
     ☐ categoria
     ☐ descripcion
+    ☐ celular
+    ☐ fecha_nac
+    ☐ img
     ☐ fecha
   viaje:
     ☐ id
@@ -19,18 +22,21 @@ pasajes:
     ☐ id
     ☐ placa
     ☐ marca
-    ☐ modelo
-    ☐ cilindrada
-    ☐ motor
-    ☐ combustible
+    ☐ modelo  @num
+    ☐ cilindrada  @color
+    ☐ motor    @x
+    ☐ combustible @x
     ☐ capacidad
-    ☐ num_puertas
+    ☐ num_puertas @x
     ☐ tipo
     ☐ fecha
   pasaje:
     ☐ id
     ☐ id_viaje
+    ☐ id_cliente
     ☐ num_asiento
+    ☐ ubicacion
+    ☐ precio
     ☐ fecha
   cliente:
     ☐ id

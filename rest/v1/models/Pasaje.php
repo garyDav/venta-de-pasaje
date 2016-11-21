@@ -42,12 +42,15 @@ $app->post("/pasaje/",function() use($app) {
 	$objDatos = json_decode(file_get_contents("php://input"));
 
 	$id_viaje = $objDatos->id_viaje;
+	$id_cliente = $objDatos->id_cliente;
 	$num_asiento = $objDatos->num_asiento;
+	$ubicacion = $objDatos->ubicacion;
+	$precio = $objDatos->precio;
 
 	try {
 		$conex = getConex();
 
-		$result = $conex->prepare("CALL pInsertPasaje('$id_viaje','$num_asiento');");
+		$result = $conex->prepare("CALL pInsertPasaje('$id_viaje','$id_cliente','$num_asiento','$ubicacion','$precio');");
 
 		$result->execute();
 		$res = $result->fetchObject();
@@ -72,11 +75,14 @@ $app->put("/pasaje/:id",function($id) use($app) {
   	$objDatos = json_decode($jsonmessage->getBody());
 
 	$id_viaje = $objDatos->id_viaje;
+	$id_cliente = $objDatos->id_cliente;
 	$num_asiento = $objDatos->num_asiento;
+	$ubicacion = $objDatos->ubicacion;
+	$precio = $objDatos->precio;
 
 	try {
 		$conex = getConex();
-		$result = $conex->prepare("UPDATE pasaje SET id_viaje='$id_viaje', num_asiento='$num_asiento' WHERE id='$id'");
+		$result = $conex->prepare("UPDATE pasaje SET id_viaje='$id_viaje',id_cliente='$id_cliente',num_asiento='$num_asiento',ubicacion='$ubicacion',precio='$precio' WHERE id='$id'");
 
 		$result->execute();
 		$conex = null;

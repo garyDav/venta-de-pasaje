@@ -44,11 +44,12 @@ $app->post("/cliente/",function() use($app) {
 	$ci = $objDatos->ci;
 	$nombre = $objDatos->nombre;
 	$apellido = $objDatos->apellido;
+	$fecha_nac = $objDatos->fecha_nac;
 
 	try {
 		$conex = getConex();
 
-		$result = $conex->prepare("CALL pInsertCliente('$ci','$nombre','$apellido');");
+		$result = $conex->prepare("CALL pInsertCliente('$ci','$nombre','$apellido','$fecha_nac');");
 
 		$result->execute();
 		$res = $result->fetchObject();
@@ -75,10 +76,11 @@ $app->put("/cliente/:id",function($id) use($app) {
 	$ci = $objDatos->ci;
 	$nombre = $objDatos->nombre;
 	$apellido = $objDatos->apellido;
+	$fecha_nac = $objDatos->fecha_nac;
 
 	try {
 		$conex = getConex();
-		$result = $conex->prepare("UPDATE cliente SET ci='$ci',nombre='$nombre',apellido='$apellido' WHERE id='$id'");
+		$result = $conex->prepare("UPDATE cliente SET ci='$ci',nombre='$nombre',apellido='$apellido',fecha_nac='$fecha_nac' WHERE id='$id'");
 
 		$result->execute();
 		$conex = null;

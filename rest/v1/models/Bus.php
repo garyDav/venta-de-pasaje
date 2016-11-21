@@ -43,22 +43,18 @@ $app->post("/bus/",function() use($app) {
 
 	$placa = $objDatos->placa;
 	$marca = $objDatos->marca;
-	$modelo = $objDatos->modelo;
-	$cilindrada = $objDatos->cilindrada;
-	$motor = $objDatos->motor;
-	$combustible = $objDatos->combustible;
+	$num = $objDatos->num;
+	$color = $objDatos->color;
 	$capacidad = $objDatos->capacidad;
-	$num_puertas = $objDatos->num_puertas;
 	$tipo = $objDatos->tipo;
 
 	try {
 		$conex = getConex();
 
-		$result = $conex->prepare("CALL pInsertBus('$placa','$marca','$modelo','$cilindrada','$motor','$combustible','$capacidad','$num_puertas','$tipo');");
+		$result = $conex->prepare("CALL pInsertBus('$placa','$marca','$num','$color','$capacidad','$tipo');");
 
 		$result->execute();
 		$res = $result->fetchObject();
-		//$res = array('response'=>'success');
 
 		$conex = null;
 
@@ -80,17 +76,14 @@ $app->put("/bus/:id",function($id) use($app) {
 
 	$placa = $objDatos->placa;
 	$marca = $objDatos->marca;
-	$modelo = $objDatos->modelo;
-	$cilindrada = $objDatos->cilindrada;
-	$motor = $objDatos->motor;
-	$combustible = $objDatos->combustible;
+	$num = $objDatos->num;
+	$color = $objDatos->color;
 	$capacidad = $objDatos->capacidad;
-	$num_puertas = $objDatos->num_puertas;
 	$tipo = $objDatos->tipo;
 
 	try {
 		$conex = getConex();
-		$result = $conex->prepare("UPDATE bus SET placa='$placa',marca='$marca',modelo='$modelo',cilindrada='$cilindrada',motor='$motor',combustible='$combustible',capacidad='$capacidad',num_puertas='$num_puertas',tipo='$tipo' WHERE id='$id'");
+		$result = $conex->prepare("UPDATE bus SET placa='$placa',marca='$marca',num='$num',color='$color',capacidad='$capacidad',tipo='$tipo' WHERE id='$id'");
 
 		$result->execute();
 		$conex = null;

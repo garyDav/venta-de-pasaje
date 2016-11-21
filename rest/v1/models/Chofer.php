@@ -46,15 +46,17 @@ $app->post("/chofer/",function() use($app) {
 	$apellido = $objDatos->apellido;
 	$categoria = $objDatos->categoria;
 	$descripcion = $objDatos->descripcion;
+	$celular = $objDatos->celular;
+	$fecha_nac = $objDatos->fecha_nac;
+	$img = $objDatos->img;
 
 	try {
 		$conex = getConex();
 
-		$result = $conex->prepare("CALL pInsertChofer('$ci','$nombre','$apellido','$categoria','$descripcion');");
+		$result = $conex->prepare("CALL pInsertChofer('$ci','$nombre','$apellido','$categoria','$descripcion','$celular','$fecha_nac','$img');");
 
 		$result->execute();
 		$res = $result->fetchObject();
-		//$res = array('response'=>'success');
 
 		$conex = null;
 
@@ -62,7 +64,6 @@ $app->post("/chofer/",function() use($app) {
 		$app->response->headers->set('Access-Control-Allow-Origin','*');
 		$app->response->status(200);
 		$app->response->body(json_encode($res));
-		//$app->response->body($ci);
 
 	}catch(PDOException $e) {
 		echo "Error: ".$e->getMessage();
@@ -79,10 +80,13 @@ $app->put("/chofer/:id",function($id) use($app) {
 	$apellido = $objDatos->apellido;
 	$categoria = $objDatos->categoria;
 	$descripcion = $objDatos->descripcion;
+	$celular = $objDatos->celular;
+	$fecha_nac = $objDatos->fecha_nac;
+	$img = $objDatos->img;
 
 	try {
 		$conex = getConex();
-		$result = $conex->prepare("UPDATE chofer SET ci='$ci',nombre='$nombre',apellido='$apellido',categoria='$categoria',descripcion='$descripcion', WHERE id='$id'");
+		$result = $conex->prepare("UPDATE chofer SET ci='$ci',nombre='$nombre',apellido='$apellido',categoria='$categoria',descripcion='$descripcion',celular='$celular',fecha_nac='$fecha_nac',img='$img' WHERE id='$id'");
 
 		$result->execute();
 		$conex = null;
