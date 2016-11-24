@@ -27,32 +27,34 @@
 								<label for="v_marca">Marca </label>
 							</div>
 							<div class="input-field col s12">
-								<input id="v_modelo" type="text" class="validate" ng-model="new.modelo" required>
-								<label for="v_modelo">Modelo </label>
+								<input id="v_numBus" type="text" class="validate" ng-model="new.num" required>
+								<label for="v_numBus">Numero de Bus </label>
 							</div>
 							<div class="input-field col s12">
-								<input id="v_cilindrada" type="text" class="validate" ng-model="new.cilindrada" required>
-								<label for="v_cilindrada">Cilindrada </label>
+								<input id="v_color" type="text" class="validate" ng-model="new.color" required>
+								<label for="v_color">Color </label>
 							</div>
 							<div class="input-field col s12">
-								<input id="v_motor" type="text" class="validate" ng-model="new.motor" required>
-								<label for="v_motor">Motor </label>
-							</div>
-							<div class="input-field col s12">
-								<input id="v_combustible" type="text" class="validate" ng-model="new.combustible" required>
-								<label for="v_combustible">Combustible </label>
-							</div>
-							<div class="input-field col s12">
-								<input id="v_capacidad" type="text" class="validate" ng-model="new.capacidad" required>
+								<input id="v_capacidad" type="number" class="validate" ng-model="new.capacidad" required>
 								<label for="v_capacidad">Capacidad </label>
 							</div>
 							<div class="input-field col s12">
-								<input id="v_num_puertas" type="number" class="validate" ng-model="new.num_puertas" required>
-								<label for="v_num_puertas">Número de puertas </label>
-							</div>
-							<div class="input-field col s12">
-								<input id="v_tipo" type="text" class="validate" ng-model="new.tipo" required>
+								<select id="v_tipo" ng-model="new.tipo">
+									<option value=""></option>
+									<option value="normal">Normal</option>
+									<option value="semi">Semi cama</option>
+									<option value="cama">Cama</option>
+								</select>
 								<label for="v_tipo">Tipo de Bus </label>
+							</div>
+							<div class="file-field input-field col s12">
+								<div class="btn">
+									<span>Imagen</span>
+									<input type="file" file-model="file">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text" ng-model="newObj.img">
+								</div>
 							</div>
 							<div class="row center">
 								<div class="col s12 m6">
@@ -86,30 +88,25 @@
 						<table class="bordered highlight responsive-table">
 							<thead>
 								<tr>
-									<th>Placa</th>
-									<th>Marca</th>
-									<th>Modelo</th>
-									<th>Cilindrada</th>
-									<th>Motor</th>
-									<th>Combustible</th>
-									<th>Capacidad</th>
-									<th>Num. de puertas</th>
-									<th>Tipo</th>
-									<th>Fecha</th>
-									<th>Acciones</th>
+									<th>Foto </th>
+									<th>Placa </th>
+									<th>Marca </th>
+									<th>Numero de Bus </th>
+									<th>Color </th>
+									<th>Capacidad </th>
+									<th>Tipo de Bus </th>
+									<th>Fecha de registro</th>
 								</tr>
 							</thead>
 							<tbody>
 								<!--<tr ng-repeat="g in garra | orderBy:'nombre':'reverse'">-->
-								<tr ng-repeat="d in data | orderBy:'Placa'">
+								<tr ng-repeat="d in data | orderBy:'fecha':'reverse'">
+									<td><img src="material/photos/{{d.img}}" class="responsive-img" width="45px"> </td>
 									<td>{{d.placa}} </td>
 									<td>{{d.marca}} </td>
-									<td>{{d.modelo}} </td>
-									<td>{{d.cilindrada}} </td>
-									<td>{{d.motor}} </td>
-									<td>{{d.combustible}} </td>
+									<td>{{d.num}} </td>
+									<td>{{d.color}} </td>
 									<td>{{d.capacidad}} </td>
-									<td>{{d.num_puertas}} </td>
 									<td>{{d.tipo}} </td>
 									<td>{{d.fecha}} </td>
 
@@ -142,5 +139,6 @@
 		$('input#input_text, textarea#descripcion').characterCounter();
 		//$('.carousel').carousel();
 		$('.carousel.carousel-slider').carousel({full_width: true});
+		$('select').material_select();
 	});
 </script>

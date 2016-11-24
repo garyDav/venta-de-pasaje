@@ -47,11 +47,12 @@ $app->post("/bus/",function() use($app) {
 	$color = $objDatos->color;
 	$capacidad = $objDatos->capacidad;
 	$tipo = $objDatos->tipo;
+	$img = $objDatos->img;
 
 	try {
 		$conex = getConex();
 
-		$result = $conex->prepare("CALL pInsertBus('$placa','$marca','$num','$color','$capacidad','$tipo');");
+		$result = $conex->prepare("CALL pInsertBus('$placa','$marca','$num','$color','$capacidad','$tipo','$img');");
 
 		$result->execute();
 		$res = $result->fetchObject();

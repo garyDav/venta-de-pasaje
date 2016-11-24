@@ -7,7 +7,7 @@
 				when('/bus',{
 					templateUrl: 'public/bus/views/list-bus.view.html'
 				}).
-				when('/bus/:id',{
+				when('/editar/bus/:id',{
 					templateUrl: 'public/bus/views/edit-bus.view.html'
 				});
 		}

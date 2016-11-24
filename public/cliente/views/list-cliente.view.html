@@ -14,28 +14,32 @@
 						</div>
 					</div>
 					<h3 class="s12 center-align">
-						Registra un nuevo viaje
+						Registra un nuevo cliente
 					</h3>
 					<form class="col s12" name="form1">
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="nombre" type="text" class="validate" ng-model="lugar.nombre" required>
-								<label for="nombre">Nombre</label>
+								<input id="ci" type="text" class="validate" ng-model="new.ci" required>
+								<label for="ci">CI </label>
 							</div>
 							<div class="input-field col s12">
-								<textarea id="descripcion" class="materialize-textarea validate" ng-model="lugar.descripcion" required></textarea>
-								<label for="descripcion">Descripcion</label>
+								<input id="nombre" type="text" class="validate" ng-model="new.nombre" required>
+								<label for="nombre">Nombre </label>
 							</div>
 							<div class="input-field col s12">
-								<input id="tipo" type="text" class="validate" ng-model="lugar.tipo" required>
-								<label for="tipo">tipo</label>
+								<input id="apellido" type="text" class="validate" ng-model="new.apellido" required>
+								<label for="apellido">Apellido </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="fecha_nac" type="text" class="datepicker" ng-model="new.fecha_nac">
+								<label for="fecha_nac">Fecha de nacimiento</label>
 							</div>
 							<div class="row center">
 								<div class="col s12 m6">
-									<a class="waves-effect waves-light btn" ng-click="guardar(lugar);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
+									<a class="waves-effect waves-light btn" ng-click="save(new);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
 								</div>
 								<div class="col s12 m6">
-									<a class="waves-effect waves-light btn red darken-4" ng-click="cancelar();"><i class="material-icons left">clear_all</i>Cancelar</a>
+									<a class="waves-effect waves-light btn red darken-4" ng-click="cancel();"><i class="material-icons left">clear_all</i>Cancelar</a>
 								</div>
 							</div>
 						</div>
@@ -54,7 +58,7 @@
 		<div class="col l8 m10 s12">
 			<div class="content">
 				<div class="row">
-					<h3 class="col s12 center-align">Lista de los Cliente</h3>
+					<h3 class="col s12 center-align">Lista de clientes</h3>
 				</div>
 				<div class="row">
 					<!-- List Lugar -->
@@ -62,19 +66,22 @@
 						<table class="bordered highlight responsive-table">
 							<thead>
 								<tr>
-									<th>Nombre</th>
-									<th>Descripcion</th>
-									<th>Tipo</th>
-									<th>Eliminar</th>
+									<th>CI </th>
+									<th>Nombre </th>
+									<th>Apellido </th>
+									<th>Nacido </th>
+									<th>Registrado </th>
 								</tr>
 							</thead>
 							<tbody>
 								<!--<tr ng-repeat="g in garra | orderBy:'nombre':'reverse'">-->
-								<tr ng-repeat="g in garra | orderBy:'nombre'">
-									<td>{{g.nombre}} </td>
-									<td>{{g.descripcion}} </td>
-									<td>{{g.tipo}} </td>
-									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(g.id);"><i class="material-icons left">delete</i></a></td>
+								<tr ng-repeat="d in data | orderBy:'fecha':'reverse'">
+									<td>{{d.ci}} </td>
+									<td>{{d.nombre}} </td>
+									<td>{{d.apellido}} </td>
+									<td>{{d.fecha_nac}} </td>
+									<td>{{d.fecha}} </td>
+									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(d.id);"><i class="material-icons left">delete</i></a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -97,10 +104,14 @@
 </div>
 
 
+
 <script>
 	$(document).ready(function() {
 		$('input#input_text, textarea#descripcion').characterCounter();
-		//$('.carousel').carousel();
-		$('.carousel.carousel-slider').carousel({full_width: true});
+		$('.datepicker').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 15 // Creates a dropdown of 15 years to control year
+		});
+		$('select').material_select();
 	});
 </script>

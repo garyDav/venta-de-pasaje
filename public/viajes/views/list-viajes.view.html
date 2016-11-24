@@ -1,4 +1,19 @@
-<div class="content" ng-controller="viajesCtrl" ng-init="find();">
+<style>
+	.input-field select {
+		clear: both;
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+	.input-field select option{
+		clear: both;
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+</style>
+
+<div class="content" ng-controller="viajesCtrl" ng-init="find();findChofer();findBus();">
 	<div class="row">
 		<div class="col l3 m2"></div>
 		<div class="col l6 m8 s12">
@@ -19,20 +34,32 @@
 					<form class="col s12" name="form1">
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="nombre" type="text" class="validate" ng-model="lugar.nombre" required>
-								<label for="nombre">Nombre</label>
+								<select ng-model="new.id_chofer" >
+									<option value=""> </option>
+									<option ng-repeat="d in dataChofer" value="{{d.id}}">{{d.nombre}} </option>
+								</select>
 							</div>
 							<div class="input-field col s12">
-								<textarea id="descripcion" class="materialize-textarea validate" ng-model="lugar.descripcion" required></textarea>
-								<label for="descripcion">Descripcion</label>
+								<select ng-model="new.id_bus" >
+									<option value=""> </option>
+									<option ng-repeat="d in dataBus" value="{{d.id}}">{{d.num}} </option>
+								</select>
 							</div>
 							<div class="input-field col s12">
-								<input id="tipo" type="text" class="validate" ng-model="lugar.tipo" required>
-								<label for="tipo">tipo</label>
+								<input id="horario" type="text" class="validate" ng-model="new.horario" required>
+								<label for="horario">Horario </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="origen" type="text" class="validate" ng-model="new.origen" required>
+								<label for="origen">Origen </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="destino" type="text" class="validate" ng-model="new.destino" required>
+								<label for="destino">Destino </label>
 							</div>
 							<div class="row center">
 								<div class="col s12 m6">
-									<a class="waves-effect waves-light btn" ng-click="guardar(lugar);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
+									<a class="waves-effect waves-light btn" ng-click="save(new);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
 								</div>
 								<div class="col s12 m6">
 									<a class="waves-effect waves-light btn red darken-4" ng-click="cancelar();"><i class="material-icons left">clear_all</i>Cancelar</a>
@@ -62,19 +89,24 @@
 						<table class="bordered highlight responsive-table">
 							<thead>
 								<tr>
-									<th>Nombre</th>
-									<th>Descripcion</th>
-									<th>Tipo</th>
-									<th>Eliminar</th>
+									<th>Nombre del chofer </th>
+									<th>Número de bus </th>
+									<th>Horario </th>
+									<th>Origen </th>
+									<th>Destino </th>
+									<th>Registrado </th>
 								</tr>
 							</thead>
 							<tbody>
 								<!--<tr ng-repeat="g in garra | orderBy:'nombre':'reverse'">-->
-								<tr ng-repeat="g in garra | orderBy:'nombre'">
-									<td>{{g.nombre}} </td>
-									<td>{{g.descripcion}} </td>
-									<td>{{g.tipo}} </td>
-									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(g.id);"><i class="material-icons left">delete</i></a></td>
+								<tr ng-repeat="d in data | orderBy:'fecha':'reverse'">
+									<td>{{d.nameChofer}} </td>
+									<td>{{d.numBus}} </td>
+									<td>{{d.horario}} </td>
+									<td>{{d.origen}} </td>
+									<td>{{d.destino}} </td>
+									<td>{{d.fecha}} </td>
+									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(d.id);"><i class="material-icons left">delete</i></a></td>
 								</tr>
 							</tbody>
 						</table>

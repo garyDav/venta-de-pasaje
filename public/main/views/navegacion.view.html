@@ -3,7 +3,7 @@
     <a ng-href="/venta-de-pasaje/" class="brand-logo left hide-on-med-and-down">Andes Bus</a>
     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
     <!-- Navegacion Escritorio -->
-    <ul class="right hide-on-small-only">
+    <ul class="right hide-on-med-and-down">
       <li><a ng-href="/venta-de-pasaje/"><i class="material-icons">refresh</i></a></li>
       <li ng-hide="c_admin || c_user"><a ng-href="/venta-de-pasaje/login"><i class="material-icons">perm_identity</i> Login</a></li>
 
@@ -12,8 +12,8 @@
         <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/viajes">Reg. de Viajes</a></li>
         <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/clientes">Reg. de Clientes</a></li>
         <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/pasajes">Venta de Pasajes</a></li>
-        <li ng-show="c_admin"><a ng-href="/venta-de-pasaje/reportes">Reportes</a></li>
-        <li ng-show="c_admin || c_user"><a ng-click="logout();">Logout</a></li>
+        <!--<li ng-show="c_admin"><a ng-href="/venta-de-pasaje/reportes">Reportes</a></li>-->
+        <li ng-show="c_admin || c_user"><a ng-click="logout();">Salir</a></li>
       <div >
       </div>
     </ul>
@@ -28,8 +28,8 @@
       <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/viajes">Registro de Viajes</a></li>
       <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/clientes">Registro de Clientes</a></li>
       <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/pasajes">Venta de Pasajes</a></li>
-      <li ng-show="c_admin"><a ng-href="/venta-de-pasaje/reportes">Reportes</a></li>
-      <li ng-show="c_admin || c_user"><a ng-click="logout();">Logout</a></li>
+      <!--<li ng-show="c_admin"><a ng-href="/venta-de-pasaje/reportes">Reportes</a></li>-->
+      <li ng-show="c_admin || c_user"><a ng-click="logout();">Salir</a></li>
     </ul>
   </div>
 </nav>

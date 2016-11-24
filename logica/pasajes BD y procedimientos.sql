@@ -34,6 +34,7 @@ CREATE TABLE bus (
     color varchar(15),
     capacidad int,
     tipo varchar(15),
+    img varchar(150),
     fecha datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -141,11 +142,12 @@ CREATE PROCEDURE pInsertBus (
 	IN v_num varchar(10),
 	IN v_color varchar(15),
 	IN v_capacidad int,
-	IN v_tipo varchar(15)
+	IN v_tipo varchar(15),
+	IN v_img varchar(150)
 )
 BEGIN
 	IF NOT EXISTS(SELECT id FROM bus WHERE placa LIKE v_placa) THEN
-		INSERT INTO bus VALUES(null, v_placa, v_marca, v_num, v_color, v_capacidad, v_tipo,CURRENT_TIMESTAMP);
+		INSERT INTO bus VALUES(null, v_placa, v_marca, v_num, v_color, v_capacidad, v_tipo, v_img,CURRENT_TIMESTAMP);
 		SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,'success' AS error;
 	ELSE
 		SELECT 'Error: placa ya registrada' error;
@@ -161,8 +163,12 @@ CREATE PROCEDURE pInsertViaje (
 	IN v_destino varchar(30)
 )
 BEGIN
+	DECLARE nameChofer varchar(50);
+	DECLARE numBus varchar(10);
+	SET nameChofer = (SELECT nombre FROM chofer WHERE id = v_id_chofer);
+	SET numBus = (SELECT num FROM bus WHERE id = v_id_bus);
 	INSERT INTO viaje VALUES(null,v_id_chofer,v_id_bus,v_horario,v_origen,v_destino,CURRENT_TIMESTAMP);
-	SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,'success' AS error;
+	SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nameChofer,numBus,'success' AS error;
 END //
 
 DROP PROCEDURE IF EXISTS pInsertPasaje;
@@ -174,9 +180,15 @@ CREATE PROCEDURE pInsertPasaje (
 	IN v_precio float
 )
 BEGIN
+	DECLARE nombre varchar(50);
+	DECLARE apellido varchar(50);
+	DECLARE horario varchar(30);
+	SET nombre = (SELECT nombre FROM cliente WHERE id = v_id_cliente);
+	SET apellido = (SELECT apellido FROM cliente WHERE id = v_id_cliente);
+	SET horario = (SELECT horario FROM viaje WHERE id = v_id_viaje);
 	IF NOT EXISTS(SELECT id FROM pasaje WHERE id_viaje = v_id_viaje AND num_asiento = v_num_asiento) THEN
 		INSERT INTO pasaje VALUES(null, v_id_viaje, v_id_cliente, v_num_asiento, v_ubicacion, v_precio,CURRENT_TIMESTAMP);
-		SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,'success' AS error;
+		SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nombre,apellido,horario,'success' AS error;
 	ELSE
 		SELECT 'Error: Número de asiento ya ocupado.' error;
 	END IF;

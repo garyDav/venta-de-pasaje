@@ -1,11 +1,80 @@
-<div class="content">
+<div class="content" ng-controller="busCtrl" ng-init="findOne();">
 	<div class="row">
-		<div class="col l3 m2 s1"></div>
-		<div class="col l6 m8 s10">
+		<div class="col l3 m2"></div>
+		<div class="col l6 m8 s12">
 			<div class="card-panel blue-grey lighten-5">
-				<h3>Vista editar buses</h3>
+				<div class="row">
+					<div class="row" ng-show="mensaje">
+						<div class="col s12">
+							<div class="content">
+								<div class="card-panel blue-grey lighten-1">
+									{{mensaje}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<h3 class="s12 center-align">
+						Registra un nuevo Bus
+					</h3>
+					<form class="col s12" name="form1">
+						<div class="row">
+							<div class="input-field col s12">
+								Placa <input id="v_placa" type="text" class="validate" ng-model="one_data.placa" required>
+								<!--<label for="v_placa">Placa </label>-->
+							</div>
+							<div class="input-field col s12">
+								Marca <input id="v_marca" type="text" class="validate" ng-model="one_data.marca" required>
+								<!--<label for="v_marca">Marca </label>-->
+							</div>
+							<div class="input-field col s12">
+								Bus <input id="v_numBus" type="text" class="validate" ng-model="one_data.num" required>
+								<!--<label for="v_numBus">Numero de Bus </label>-->
+							</div>
+							<div class="input-field col s12">
+								Color <input id="v_color" type="text" class="validate" ng-model="one_data.color" required>
+								<!--<label for="v_color">Color </label>-->
+							</div>
+							<div class="input-field col s12">
+								Capacidad <input id="v_capacidad" type="text" class="validate" ng-model="one_data.capacidad" required>
+								<!--<label for="v_capacidad">Capacidad </label>-->
+							</div>
+							<div class="input-field col s12">
+								Tipo de Bus <select id="v_tipo" ng-model="one_data.tipo">
+									<option value=""></option>
+									<option value="normal">Normal</option>
+									<option value="semi">Semi cama</option>
+									<option value="cama">Cama</option>
+								</select>
+								<!--<label for="v_tipo"></label>-->
+							</div>
+							<div class="col s12 center-align">
+								<img src="material/photos/{{one_data.img}}" width="300px" class="responsive-img">
+							</div>
+
+							<div class="row center">
+								<div class="col s12 m6">
+									<a class="waves-effect waves-light btn" ng-click="editSave(one_data);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
+								</div>
+								<div class="col s12 m6">
+									<a class="waves-effect waves-light btn red darken-4" ng-click="editCancel();"><i class="material-icons left">clear_all</i>Cancelar</a>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div class="col l3 m2 s1"></div>
+		<div class="col l3 m2"></div>
 	</div>
+
 </div>
+
+
+<script>
+	$(document).ready(function() {
+		$('input#input_text, textarea#descripcion').characterCounter();
+		//$('.carousel').carousel();
+		$('.carousel.carousel-slider').carousel({full_width: true});
+		$('select').material_select();
+	});
+</script>

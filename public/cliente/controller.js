@@ -1,13 +1,17 @@
 (function(angular){
 	'use strict';
-	angular.module('clienteModule').controller('clienteCtrl',['$scope','clienteService',
-		function($scope,clienteService) {
+	angular.module('clienteModule').controller('clienteCtrl',['$scope','clienteService','funcionesService',
+		function($scope,clienteService,funcionesService) {
 			$scope.mensaje = '';
 			console.log('Entra a clienteCtrl');
 			
 			$scope.find = function() {
 				var obj = clienteService.query();
 				obj.$promise.then(function(response){
+					response.forEach(function(element,index,array) {
+						element.fecha_nac = funcionesService.fecha(element.fecha_nac);
+						element.fecha = funcionesService.timeVerbal(element.fecha);
+					});
 					$scope.data = response;
 					console.log(response);
 				},function(response){
@@ -16,6 +20,7 @@
 			}
 
 			$scope.save = function(newD) {
+				newD.fecha_nac = funcionesService.convertCadFecha(newD.fecha_nac);
 				var obj = new clienteService(newD);
 				obj.$save(function(response) {
 					var newData = {
@@ -23,18 +28,22 @@
 						ci: newD.ci,
 						nombre: newD.nombre,
 						apellido: newD.apellido,
-						fecha: response.fecha
+						fecha_nac: funcionesService.fecha(newD.fecha_nac),
+						fecha: funcionesService.timeVerbal(response.fecha)
 					};
 					console.log(response);
-					$scope.mensaje = response.error;
-					$scope.data.push(newData);
-					console.log($scope.data);
+					if( response.error == 'success' ) {
+						$scope.mensaje = 'Registro insertado correctamente';
+						$scope.data.push(newData);
+					} else {
+						$scope.mensaje = response.error;
+					}
 				},function(response) {
 					console.log(response);
 				});
 			}
 			$scope.cancel = function() {
-				$scope.data = {};
+				$scope.new = {};
 			}
 			$scope.delete = function(id) {
 				var remove = confirm('¿Está seguro de eliminar el registro?');

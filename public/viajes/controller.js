@@ -1,36 +1,60 @@
 (function(angular){
 	'use strict';
-	angular.module('viajesModule').controller('viajesCtrl',['$scope','viajesService',
-		function($scope,viajesService) {
+	angular.module('viajesModule').controller('viajesCtrl',['$scope','viajesService','choferService','busService','funcionesService',
+		function($scope,viajesService,choferService,busService,funcionesService) {
 			$scope.mensaje = '';
 			console.log('Entra a viajesCtrl');
 			
 			$scope.find = function() {
 				var obj = viajesService.query();
 				obj.$promise.then(function(response){
+					response.forEach(function(element,index,array) {
+						element.fecha = funcionesService.timeVerbal(element.fecha);
+					});
 					$scope.data = response;
 					console.log(response);
 				},function(response){
 					console.log(response);
 				});
 			}
-
+			$scope.findChofer = function() {
+				var obj = choferService.query();
+				obj.$promise.then(function(response){
+					$scope.dataChofer = response;
+					console.log(response);
+				},function(response){
+					console.log(response);
+				});
+			};
+			$scope.findBus = function() {
+				var obj = busService.query();
+				obj.$promise.then(function(response){
+					$scope.dataBus = response;
+					console.log(response);
+				},function(response){
+					console.log(response);
+				});
+			};
 			$scope.save = function(newD) {
 				var obj = new viajesService(newD);
 				obj.$save(function(response) {
+					console.log(response);
 					var newData = {
 						id: response.id,
-						id_chofer: newD.id_chofer,
-						id_bus: newD.id_bus,
+						nameChofer: response.nameChofer,
+						numBus: response.numBus,
 						horario: newD.horario,
 						origen: newD.origen,
 						destino: newD.destino,
-						fecha: response.fecha
+						fecha: funcionesService.timeVerbal(response.fecha)
 					};
-					console.log(response);
-					$scope.mensaje = response.error;
-					$scope.data.push(newData);
-					console.log($scope.data);
+					if( response.error == 'success' ) {
+						$scope.mensaje = 'Registro insertado correctamente';
+						console.log(newData);
+						$scope.data.push(newData);
+					} else {
+						$scope.mensaje = response.error;
+					}
 				},function(response) {
 					console.log(response);
 				});

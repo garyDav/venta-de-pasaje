@@ -1,33 +1,62 @@
 (function(angular){
 	'use strict';
-	angular.module('pasajesModule').controller('pasajesCtrl',['$scope','pasajesService',
-		function($scope,pasajesService) {
+	angular.module('pasajesModule').controller('pasajesCtrl',['$scope','pasajesService','clienteService','funcionesService','viajesService',
+		function($scope,pasajesService,clienteService,funcionesService,viajesService) {
 			$scope.mensaje = '';
 			console.log('Entra a pasajesCtrl');
 			
 			$scope.find = function() {
 				var obj = pasajesService.query();
 				obj.$promise.then(function(response){
+					response.forEach(function(element,index,array) {
+						element.fecha = funcionesService.timeVerbal(element.fecha);
+					});
 					$scope.data = response;
 					console.log(response);
 				},function(response){
 					console.log(response);
 				});
-			}
+			};
+			$scope.findCliente = function() {
+				var obj = clienteService.query();
+				obj.$promise.then(function(response){
+					$scope.dataCliente = response;
+					console.log(response);
+				},function(response){
+					console.log(response);
+				});
+			};
+			$scope.findViaje = function() {
+				var obj = viajesService.query();
+				obj.$promise.then(function(response){
+					$scope.dataViaje = response;
+					console.log(response);
+				},function(response){
+					console.log(response);
+				});
+			};
 
 			$scope.save = function(newD) {
+				console.log(newD);
 				var obj = new pasajesService(newD);
 				obj.$save(function(response) {
+					console.log(response);
 					var newData = {
 						id: response.id,
-						id_viaje: newD.id_viaje,
+						nombre: response.nombre,
+						apellido: response.apellido,
+						horario: response.horario,
 						num_asiento: newD.num_asiento,
-						fecha: response.fecha
+						ubicacion: newD.ubicacion,
+						precio: newD.precio,
+						fecha: funcionesService.timeVerbal(response.fecha)
 					};
-					console.log(response);
-					$scope.mensaje = response.error;
-					$scope.data.push(newData);
-					console.log($scope.data);
+					if( response.error == 'success' ) {
+						$scope.mensaje = 'Registro insertado correctamente';
+						$scope.data.push(newData);
+					} else {
+						$scope.mensaje = response.error;
+					}
 				},function(response) {
 					console.log(response);
 				});

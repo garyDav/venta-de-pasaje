@@ -117,7 +117,7 @@
 					dia = '0'+dia;
 				}
 				
-				return año+'/'+mes+'/'+dia;
+				return año+'-'+mes+'-'+dia;
 			},
 			timeVerbal: function(fecha) {
 				var tiempo = new Date();
@@ -217,5 +217,6 @@
 			return deferred.promise;
 		};
 	}]);
+	
 
 })(window.angular);

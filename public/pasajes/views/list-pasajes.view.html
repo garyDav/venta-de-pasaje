@@ -1,4 +1,19 @@
-<div class="content" ng-controller="pasajesCtrl" ng-init="find();">
+<style>
+	.input-field select {
+		clear: both;
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+	.input-field select option{
+		clear: both;
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+</style>
+
+<div class="content" ng-controller="pasajesCtrl" ng-init="find();findCliente();findViaje();">
 	<div class="row">
 		<div class="col l3 m2"></div>
 		<div class="col l6 m8 s12">
@@ -14,28 +29,40 @@
 						</div>
 					</div>
 					<h3 class="s12 center-align">
-						Registra la Venta de Pasajes
+						Vender pasaje
 					</h3>
 					<form class="col s12" name="form1">
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="nombre" type="text" class="validate" ng-model="lugar.nombre" required>
-								<label for="nombre">Nombre</label>
+								<select ng-model="new.id_cliente" >
+									<option value=""> </option>
+									<option ng-repeat="d in dataCliente" value="{{d.id}}">{{d.nombre}} {{d.apellido}} </option>
+								</select>
 							</div>
 							<div class="input-field col s12">
-								<textarea id="descripcion" class="materialize-textarea validate" ng-model="lugar.descripcion" required></textarea>
-								<label for="descripcion">Descripcion</label>
+								<select ng-model="new.id_viaje" >
+									<option value=""> </option>
+									<option ng-repeat="d in dataViaje" value="{{d.id}}">{{d.horario}} </option>
+								</select>
 							</div>
 							<div class="input-field col s12">
-								<input id="tipo" type="text" class="validate" ng-model="lugar.tipo" required>
-								<label for="tipo">tipo</label>
+								<input id="horario" type="number" class="validate" ng-model="new.num_asiento" required>
+								<label for="horario">Número de asiento </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="origen" type="text" class="validate" ng-model="new.ubicacion" required>
+								<label for="origen">Ubicación </label>
+							</div>
+							<div class="input-field col s12">
+								<input id="destino" type="number" class="validate" ng-model="new.precio" required>
+								<label for="destino">Precio </label>
 							</div>
 							<div class="row center">
 								<div class="col s12 m6">
-									<a class="waves-effect waves-light btn" ng-click="guardar(lugar);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
+									<a class="waves-effect waves-light btn" ng-click="save(new);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
 								</div>
 								<div class="col s12 m6">
-									<a class="waves-effect waves-light btn red darken-4" ng-click="cancelar();"><i class="material-icons left">clear_all</i>Cancelar</a>
+									<a class="waves-effect waves-light btn red darken-4" ng-click="cancel();"><i class="material-icons left">clear_all</i>Cancelar</a>
 								</div>
 							</div>
 						</div>
@@ -54,7 +81,7 @@
 		<div class="col l8 m10 s12">
 			<div class="content">
 				<div class="row">
-					<h3 class="col s12 center-align">Lista de los lugares</h3>
+					<h3 class="col s12 center-align">Lista de viajes</h3>
 				</div>
 				<div class="row">
 					<!-- List Lugar -->
@@ -62,19 +89,24 @@
 						<table class="bordered highlight responsive-table">
 							<thead>
 								<tr>
-									<th>Nombre</th>
-									<th>Descripcion</th>
-									<th>Tipo</th>
-									<th>Eliminar</th>
+									<th>Nombre del cliente </th>
+									<th>Horario de viaje </th>
+									<th>Número de asiento </th>
+									<th>Ubicación </th>
+									<th>Precio </th>
+									<th>Registrado </th>
 								</tr>
 							</thead>
 							<tbody>
 								<!--<tr ng-repeat="g in garra | orderBy:'nombre':'reverse'">-->
-								<tr ng-repeat="g in garra | orderBy:'nombre'">
-									<td>{{g.nombre}} </td>
-									<td>{{g.descripcion}} </td>
-									<td>{{g.tipo}} </td>
-									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(g.id);"><i class="material-icons left">delete</i></a></td>
+								<tr ng-repeat="d in data | orderBy:'fecha':'reverse'">
+									<td>{{d.nombre}} {{d.apellido}} </td>
+									<td>{{d.horario}} </td>
+									<td>{{d.num_asiento}} </td>
+									<td>{{d.ubicacion}} </td>
+									<td>{{d.precio}} </td>
+									<td>{{d.fecha}} </td>
+									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(d.id);"><i class="material-icons left">delete</i></a></td>
 								</tr>
 							</tbody>
 						</table>
