@@ -10,12 +10,6 @@
 				when('/login',{
 					templateUrl: 'public/main/views/login.view.html'
 				}).
-				when('/admin',{
-					templateUrl: 'public/main/views/admin.view.html'
-				}).
-				when('/user',{
-					templateUrl: 'public/main/views/user.view.html'
-				}).
 				otherwise({
 					redirectTo: '/'
 				});

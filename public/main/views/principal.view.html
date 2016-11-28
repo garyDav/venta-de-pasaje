@@ -1,30 +1,75 @@
-<div class="content">
-  <div class="row">
-    <div class="col s12">
-      <h3 class="center-align">Esta es la mas elegante pagina de Buses que veras en tu corta vida</h3>
+<div id="index-banner" class="parallax-container">
+  <div class="parallax"><img src="material/img/andes_bus.jpg" alt="Unsplashed background img 1"></div>
+</div>
+
+<div class="section no-pad-bot" id="index-banner">
+  <div class="container">
+    <br><br>
+    <h1 class="header center orange-text text-darken-3">Sistema de ventas de pasaje "Andes Bus" </h1>
+    <div class="row center">
+      <h5 class="header col s12 light">Una moderna plataforma venta de pasajes</h5>
     </div>
+    <div class="row center">
+      <a href="/venta-de-pasaje/viajes" id="download-button" class="btn-large waves-effect waves-light orange darken-4">Viajes </a>
+    </div>
+    <br><br>
+
   </div>
 </div>
 
 
-<div class="parallax-container">
-  <div class="parallax"><img ng-src="material/img/parallax1.jpg"></div>
-</div>
-<div class="section white">
-  <div class="row container">
-    <h2 class="header">Nuestros Buses</h2>
-    <p class="grey-text text-darken-3 lighten-3">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora est, fugiat quisquam repudiandae accusantium quasi laboriosam molestias corrupti vel explicabo, vero nam odio qui, perspiciatis eius beatae, iure excepturi aperiam!
-    </p>
+<div class="container">
+  <div class="section">
+
+    <!--   Icon Section   -->
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">flash_on</i></h2>
+          <h5 class="center">Speeds up development</h5>
+
+          <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+        </div>
+      </div>
+
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">group</i></h2>
+          <h5 class="center">User Experience Focused</h5>
+
+          <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
+        </div>
+      </div>
+
+      <div class="col s12 m4">
+        <div class="icon-block">
+          <h2 class="center light-blue-text"><i class="material-icons">settings</i></h2>
+          <h5 class="center">Easy to work with</h5>
+
+          <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+<div class="carousel">
+  <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/250/250/transport/1"></a>
+  <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/250/250/transport/2"></a>
+  <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/250/250/transport/3"></a>
+  <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/250/250/transport/4"></a>
+  <a class="carousel-item" href="#five!"><img src="http://lorempixel.com/250/250/transport/5"></a>
 </div>
-<div class="parallax-container">
-  <div class="parallax"><img ng-src="material/img/parallax2.jpg"></div>
 </div>
 
 
 <script>
   $(document).ready(function(){
+    $('.carousel').carousel({
+      dist:0,
+      shift:0,
+      padding:20,
+    });
     $('.parallax').parallax();
   });
 </script>

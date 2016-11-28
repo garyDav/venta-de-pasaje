@@ -5,9 +5,12 @@
 		function($routeProvider) {
 			$routeProvider.
 				when('/viajes',{
+					templateUrl: 'public/viajes/views/viajes.view.html'
+				}).
+				when('/registrar/viajes',{
 					templateUrl: 'public/viajes/views/list-viajes.view.html'
 				}).
-				when('/viajes/:id',{
+				when('/editar/viaje/:id',{
 					templateUrl: 'public/viajes/views/edit-viajes.view.html'
 				});
 		}

@@ -180,15 +180,15 @@ CREATE PROCEDURE pInsertPasaje (
 	IN v_precio float
 )
 BEGIN
-	DECLARE nombre varchar(50);
-	DECLARE apellido varchar(50);
-	DECLARE horario varchar(30);
-	SET nombre = (SELECT nombre FROM cliente WHERE id = v_id_cliente);
-	SET apellido = (SELECT apellido FROM cliente WHERE id = v_id_cliente);
-	SET horario = (SELECT horario FROM viaje WHERE id = v_id_viaje);
+	DECLARE nomCliente varchar(50);
+	DECLARE apCliente varchar(50);
+	DECLARE hr varchar(30);
 	IF NOT EXISTS(SELECT id FROM pasaje WHERE id_viaje = v_id_viaje AND num_asiento = v_num_asiento) THEN
+		SET nomCliente = (SELECT nombre FROM cliente WHERE id = v_id_cliente);
+		SET apCliente = (SELECT apellido FROM cliente WHERE id = v_id_cliente);
+		SET hr = (SELECT horario FROM viaje WHERE id = v_id_viaje);
 		INSERT INTO pasaje VALUES(null, v_id_viaje, v_id_cliente, v_num_asiento, v_ubicacion, v_precio,CURRENT_TIMESTAMP);
-		SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nombre,apellido,horario,'success' AS error;
+		SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nomCliente as nombre,apCliente as apellido,hr as horario,'success' AS error;
 	ELSE
 		SELECT 'Error: Número de asiento ya ocupado.' error;
 	END IF;

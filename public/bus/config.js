@@ -4,7 +4,10 @@
 	angular.module('busModule').config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
-				when('/bus',{
+				when('/buses',{
+					templateUrl: 'public/bus/views/buses.view.html'
+				}).
+				when('/registrar/buses',{
 					templateUrl: 'public/bus/views/list-bus.view.html'
 				}).
 				when('/editar/bus/:id',{

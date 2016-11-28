@@ -24,11 +24,11 @@
 						sessionService.set('user',res.data.tipo);
 						if(res.data.tipo == 'user') {
 							$rootScope.c_user = true;
-							$location.path('/user');
+							$location.path('/registrar/pasajes');
 						}
 						if(res.data.tipo == 'admin') {
 							$rootScope.c_admin = true;
-							$location.path('/admin');
+							$location.path('/registrar/pasajes');
 						}
 					} else {
 						scope.msglogin = res.data.error;

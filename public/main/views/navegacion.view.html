@@ -1,39 +1,32 @@
-<nav >
-  <div class="nav-wrapper grey darken-4">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+
+<nav class="nav-extended">
+  <div class="nav-wrapper orange darken-3">
     <a ng-href="/venta-de-pasaje/" class="brand-logo left hide-on-med-and-down">Andes Bus</a>
     <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-    <!-- Navegacion Escritorio -->
-    <ul class="right hide-on-med-and-down">
-      <li><a ng-href="/venta-de-pasaje/"><i class="material-icons">refresh</i></a></li>
-      <li ng-hide="c_admin || c_user"><a ng-href="/venta-de-pasaje/login"><i class="material-icons">perm_identity</i> Login</a></li>
-
-        <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/choferes">Reg. Choferes</a></li>
-        <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/bus">Reg. Buses</a></li>
-        <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/viajes">Reg. de Viajes</a></li>
-        <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/clientes">Reg. de Clientes</a></li>
-        <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/pasajes">Venta de Pasajes</a></li>
-        <!--<li ng-show="c_admin"><a ng-href="/venta-de-pasaje/reportes">Reportes</a></li>-->
-        <li ng-show="c_admin || c_user"><a ng-click="logout();">Salir</a></li>
-      <div >
-      </div>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a ng-href="/venta-de-pasaje/"><i class="material-icons left">refresh</i>Inicio </a></li>
+      <li ng-hide="c_admin || c_user"><a ng-href="/venta-de-pasaje/login"><i class="material-icons left">perm_identity</i>Ingresar </a></li>
+      <li ng-show="c_admin || c_user"><a ng-click="logout();">Salir</a></li>
+    </ul>
+    <ul class="side-nav" id="mobile-demo">
+      <li><a ng-href="/venta-de-pasaje/"><i class="material-icons left">refresh</i>Inicio </a></li>
+      <li ng-hide="c_admin || c_user"><a ng-href="/venta-de-pasaje/login"><i class="material-icons left">perm_identity</i>Ingresar </a></li>
+      <li ng-show="c_admin || c_user"><a ng-click="logout();">Salir</a></li>
     </ul>
 
-    <!-- Navegacion MOVIL -->
-    <ul class="side-nav" id="mobile-demo">
-      <li><a ng-href="/venta-de-pasaje/"><i class="material-icons">refresh</i> Home</a></li>
-      <li ng-hide="c_admin || c_user"><a ng-href="/venta-de-pasaje/login">Login</a></li>
+    <ul class="tabs tabs-transparent orange darken-4">
+      <li class="tab" ng-hide="c_admin || c_user"><a ng-click="navViajes();">Viajes </a></li>
+      <li class="tab" ng-hide="c_admin || c_user"><a ng-click="navBuses();">Buses </a></li>
 
-      <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/choferes">Registro choferes</a></li>
-      <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/bus">Registro Buses</a></li>
-      <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/viajes">Registro de Viajes</a></li>
-      <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/clientes">Registro de Clientes</a></li>
-      <li ng-show="c_admin || c_user"><a ng-href="/venta-de-pasaje/pasajes">Venta de Pasajes</a></li>
-      <!--<li ng-show="c_admin"><a ng-href="/venta-de-pasaje/reportes">Reportes</a></li>-->
-      <li ng-show="c_admin || c_user"><a ng-click="logout();">Salir</a></li>
+      <li class="tab" ng-show="c_admin || c_user"><a ng-click="navRegChoferes();">Choferes </a></li>
+      <li class="tab" ng-show="c_admin || c_user"><a ng-click="navRegBuses();">Buses </a></li>
+      <li class="tab" ng-show="c_admin || c_user"><a ng-click="navRegViajes();">Viajes </a></li>
+      <li class="tab" ng-show="c_admin || c_user"><a ng-click="navRegClientes();">Clientes </a></li>
+      <li class="tab" ng-show="c_admin || c_user"><a ng-click="navRegPasajes();">Venta de Pasajes </a></li>
     </ul>
   </div>
 </nav>
-
 
 
 

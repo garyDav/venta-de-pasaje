@@ -4,10 +4,10 @@
 	angular.module('pasajesModule').config(['$routeProvider',
 		function($routeProvider) {
 			$routeProvider.
-				when('/pasajes',{
+				when('/registrar/pasajes',{
 					templateUrl: 'public/pasajes/views/list-pasajes.view.html'
 				}).
-				when('/pasajes/:id',{
+				when('/editar/pasaje/:id',{
 					templateUrl: 'public/pasajes/views/edit-pasajes.view.html'
 				});
 		}
