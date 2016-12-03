@@ -35,13 +35,13 @@
 						<div class="row">
 							<div class="input-field col s12">
 								<select ng-model="new.id_chofer" >
-									<option value=""> </option>
+									<option value="" disabled selected>Chofer </option>
 									<option ng-repeat="d in dataChofer" value="{{d.id}}">{{d.nombre}} </option>
 								</select>
 							</div>
 							<div class="input-field col s12">
 								<select ng-model="new.id_bus" >
-									<option value=""> </option>
+									<option value="" disabled selected>Bus </option>
 									<option ng-repeat="d in dataBus" value="{{d.id}}">{{d.num}} </option>
 								</select>
 							</div>

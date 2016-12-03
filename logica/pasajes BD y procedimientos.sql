@@ -209,3 +209,25 @@ BEGIN
 		SELECT 'Error: CI ya registrado.' error;
 	END IF;
 END //
+
+
+DROP PROCEDURE IF EXISTS pReporte;
+CREATE PROCEDURE pReporte (
+    IN v_fecha date
+)
+BEGIN
+	IF EXISTS(SELECT id FROM pasaje WHERE SUBSTRING(fecha,1,10) LIKE v_fecha) THEN
+		SELECT p.id,p.num_asiento,p.ubicacion,p.precio,p.fecha,v.horario,
+			v.origen,v.destino,ch.ci AS ci_chofer,ch.nombre AS nombre_chofer,b.num AS num_bus,
+			cli.ci AS ci_cliente,cli.nombre AS nombre_cliente,cli.apellido AS apellido_cliente 
+		FROM bus as b,chofer as ch,viaje as v,cliente as cli,pasaje as p 
+		WHERE v.id_chofer=ch.id AND v.id_bus=b.id AND p.id_viaje=v.id AND p.id_cliente=cli.id AND 
+			p.fecha > CONCAT(v_fecha,' ','00:00:01') AND p.fecha < CONCAT(v_fecha,' ','23:59:59');
+	ELSE
+		SELECT 'No se encontraron ventas en esa fecha' error;
+	END IF;
+END //
+
+--SELECT * FROM bus as b,chofer as ch,viaje as v,cliente as cli,pasaje as p WHERE v.id_chofer=ch.id AND v.id_bus=b.id AND p.id_viaje=v.id AND p.id_cliente=cli.id;
+
+--SELECT p.id,p.num_asiento,p.ubicacion,p.precio,p.fecha,v.horario,v.origen,v.destino,ch.ci AS ci_chofer,ch.nombre AS nombre_chofer,b.num AS num_bus,cli.ci AS ci_cliente,cli.nombre AS nombre_cliente,cli.apellido AS apellido_cliente FROM bus as b,chofer as ch,viaje as v,cliente as cli,pasaje as p WHERE v.id_chofer=ch.id AND v.id_bus=b.id AND p.id_viaje=v.id AND p.id_cliente=cli.id AND p.fecha = '2016-12-06';

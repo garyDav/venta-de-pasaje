@@ -20,6 +20,7 @@ require 'models/Chofer.php';
 require 'models/Cliente.php';
 require 'models/Pasaje.php';
 require 'models/Viaje.php';
+require 'models/Reporte.php';
 //end EntidadesRESTFULL
 
 $app->run();

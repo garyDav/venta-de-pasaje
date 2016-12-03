@@ -23,18 +23,17 @@
 				newD.fecha_nac = funcionesService.convertCadFecha(newD.fecha_nac);
 				var obj = new clienteService(newD);
 				obj.$save(function(response) {
-					var newData = {
-						id: response.id,
-						ci: newD.ci,
-						nombre: newD.nombre,
-						apellido: newD.apellido,
-						fecha_nac: funcionesService.fecha(newD.fecha_nac),
-						fecha: funcionesService.timeVerbal(response.fecha)
-					};
-					console.log(response);
 					if( response.error == 'success' ) {
+						var newData = {
+							id: response.id,
+							ci: newD.ci,
+							nombre: newD.nombre,
+							apellido: newD.apellido,
+							fecha_nac: funcionesService.fecha(newD.fecha_nac),
+							fecha: funcionesService.timeVerbal(response.fecha)
+						};
 						$scope.mensaje = 'Registro insertado correctamente';
-						$scope.data.push(newData);
+						$segurocope.data.push(newData);
 					} else {
 						$scope.mensaje = response.error;
 					}

@@ -45,20 +45,22 @@
 
 			$scope.navRegChoferes = function() {
 				$location.path('/registrar/choferes');
-			}
+			};
 			$scope.navRegBuses = function() {
 				$location.path('/registrar/buses');
-			}
+			};
 			$scope.navRegViajes = function() {
 				$location.path('/registrar/viajes');
-			}
+			};
 			$scope.navRegClientes = function() {
 				$location.path('/registrar/clientes');
-			}
+			};
 			$scope.navRegPasajes = function() {
 				$location.path('/registrar/pasajes');
-			}
-			
+			};
+			$scope.navReportes = function() {
+				$location.path('/reportes');
+			};
 		}
 	]);
 

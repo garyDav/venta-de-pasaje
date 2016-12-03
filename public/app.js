@@ -3,7 +3,7 @@
 
 //Variable global mainApplicationModuleName donde carga el modulo principal
 var mainApplicationModuleName = 'ventaPasajes';
-var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','mainModule','busModule','choferModule','clienteModule','pasajesModule','viajesModule','LocalStorageModule','angular-loading-bar','ngAnimate']);
+var mainApplicationModule = angular.module(mainApplicationModuleName, ['ngResource','ngRoute','mainModule','busModule','choferModule','clienteModule','pasajesModule','viajesModule','reportesModule','LocalStorageModule','angular-loading-bar','ngAnimate']);
 
 mainApplicationModule.config(['$locationProvider',function($locationProvider) {
 	$locationProvider.html5Mode(true);
@@ -18,10 +18,10 @@ mainApplicationModule.config(['cfpLoadingBarProvider', function(cfpLoadingBarPro
 }]);
 
 mainApplicationModule.run(function($rootScope,$location,sessionService,loginService) {
-	var routespermission = ['/','/buses','/viajes','/login','/registrar/buses','/editar/bus/:id','/registrar/choferes','/editar/chofer/:id','/registrar/pasajes','/editar/pasaje/:id','/registrar/viajes','/editar/viaje/:id','/registrar/clientes','/editar/cliente/:id'];
+	var routespermission = ['/','/reportes','/buses','/viajes','/login','/registrar/buses','/editar/bus/:id','/registrar/choferes','/editar/chofer/:id','/registrar/pasajes','/editar/pasaje/:id','/registrar/viajes','/editar/viaje/:id','/registrar/clientes','/editar/cliente/:id'];
 	$rootScope.$on('$routeChangeStart',function() {
 		if( routespermission.indexOf($location.path()) != -1 ) {
-			if( $location.path() == '/registrar/buses' || $location.path() == '/editar/bus/:id' || $location.path() == '/registrar/choferes' || $location.path() == '/editar/chofer/:id' || $location.path() == '/registrar/pasajes' || $location.path() == '/editar/pasaje/:id' || $location.path() == '/registrar/viajes' || $location.path() == '/editar/viaje/:id' || $location.path() == '/registrar/clientes' || $location.path() == '/editar/cliente/:id' )
+			if( $location.path() == '/registrar/buses' || $location.path() == '/editar/bus/:id' || $location.path() == '/registrar/choferes' || $location.path() == '/editar/chofer/:id' || $location.path() == '/registrar/pasajes' || $location.path() == '/editar/pasaje/:id' || $location.path() == '/registrar/viajes' || $location.path() == '/editar/viaje/:id' || $location.path() == '/registrar/clientes' || $location.path() == '/editar/cliente/:id' || $location.path() == '/reportes' )
 				if( !loginService.isLogged() )
 					$location.path('/');
 			if( sessionService.get('user') == 'admin' )

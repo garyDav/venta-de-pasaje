@@ -1,0 +1,48 @@
+<div style="background: #e9ebee;" class="content z-depth-2" ng-controller="reportesCtrl" ng-init="find();">
+	<div class="row">
+		<div class="col l3 m2"></div>
+		<div class="col l6 m8 s12">
+			<div class="card-panel">
+				<div class="row">
+					<div class="row" ng-show="mensaje">
+						<div class="col s12">
+							<div class="content">
+								<div class="card-panel blue-grey lighten-1">
+									{{mensaje}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<h3 class="s12 center-align">
+						Reporte de ventas por fecha
+					</h3>
+					<form class="col s12" name="form1">
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="fecha_nac" type="text" class="datepicker" ng-model="new.fecha">
+								<label for="fecha_nac">¿Fecha de ventas?</label>
+							</div>
+							<div class="row center">
+								<div class="col s12 m6">
+									<a class="waves-effect waves-light btn" ng-click="save(new);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Generar Reporte</a>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col l3 m2"></div>
+	</div>
+</div>
+
+
+
+<script>
+	$(document).ready(function() {
+		$('.datepicker').pickadate({
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 15 // Creates a dropdown of 15 years to control year
+		});
+	});
+</script>

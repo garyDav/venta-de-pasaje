@@ -40,18 +40,17 @@
 				console.log(newD);
 				var obj = new pasajesService(newD);
 				obj.$save(function(response) {
-					console.log(response);
-					var newData = {
-						id: response.id,
-						nombre: response.nombre,
-						apellido: response.apellido,
-						horario: response.horario,
-						num_asiento: newD.num_asiento,
-						ubicacion: newD.ubicacion,
-						precio: newD.precio,
-						fecha: funcionesService.timeVerbal(response.fecha)
-					};
 					if( response.error == 'success' ) {
+						var newData = {
+							id: response.id,
+							nombre: response.nombre,
+							apellido: response.apellido,
+							horario: response.horario,
+							num_asiento: newD.num_asiento,
+							ubicacion: newD.ubicacion,
+							precio: newD.precio,
+							fecha: funcionesService.timeVerbal(response.fecha)
+						};
 						$scope.mensaje = 'Registro insertado correctamente';
 						$scope.data.push(newData);
 					} else {
