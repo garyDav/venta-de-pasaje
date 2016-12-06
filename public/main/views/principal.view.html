@@ -1,3 +1,6 @@
+<!--<script src="material/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>-->
+
 <div id="index-banner" class="parallax-container">
   <div class="parallax"><img src="material/img/andes_bus.jpg" alt="Unsplashed background img 1"></div>
 </div>
@@ -18,7 +21,7 @@
 </div>
 
 
-<div class="container">
+<div class="container" ng-controller="busCtrl">
   <div class="section">
 
     <!--   Icon Section   -->
@@ -53,14 +56,14 @@
 
   </div>
 
-<div class="carousel">
-  <a class="carousel-item" href="#one!"><img src="http://lorempixel.com/250/250/transport/1"></a>
-  <a class="carousel-item" href="#two!"><img src="http://lorempixel.com/250/250/transport/2"></a>
-  <a class="carousel-item" href="#three!"><img src="http://lorempixel.com/250/250/transport/3"></a>
-  <a class="carousel-item" href="#four!"><img src="http://lorempixel.com/250/250/transport/4"></a>
-  <a class="carousel-item" href="#five!"><img src="http://lorempixel.com/250/250/transport/5"></a>
+  <div class="carousel">
+    <a class="carousel-item" href=""><img ng-src="material/photos/1481001195.jpeg" style="height: 280px;"></a>
+    <a class="carousel-item" href=""><img ng-src="material/photos/1481001247.jpeg" style="height: 280px;"></a>
+    <a class="carousel-item" href=""><img ng-src="material/photos/1481001302.jpeg" style="height: 280px;"></a>
+    <a class="carousel-item" href=""><img ng-src="material/photos/1481001341.jpeg" style="height: 280px;"></a>
+  </div>
 </div>
-</div>
+
 
 
 <script>
@@ -71,5 +74,7 @@
       padding:20,
     });
     $('.parallax').parallax();
+    /*$(".dropdown-button").dropdown();
+    $(".button-collapse").sideNav();*/
   });
 </script>

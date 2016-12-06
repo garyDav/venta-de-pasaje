@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-11-2016 a las 23:57:09
+-- Tiempo de generación: 06-12-2016 a las 07:13:50
 -- Versión del servidor: 10.1.9-MariaDB
 -- Versión de PHP: 7.0.1
 
@@ -48,15 +48,15 @@ END IF;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pInsertPasaje` (IN `v_id_viaje` INT, IN `v_id_cliente` INT, IN `v_num_asiento` INT, IN `v_ubicacion` VARCHAR(10), IN `v_precio` FLOAT)  BEGIN
-DECLARE nombre varchar(50);
-DECLARE apellido varchar(50);
-DECLARE horario varchar(30);
-SET nombre = (SELECT nombre FROM cliente WHERE id = v_id_cliente);
-SET apellido = (SELECT apellido FROM cliente WHERE id = v_id_cliente);
-SET horario = (SELECT horario FROM viaje WHERE id = v_id_viaje);
+DECLARE nomCliente varchar(50);
+DECLARE apCliente varchar(50);
+DECLARE hr varchar(30);
 IF NOT EXISTS(SELECT id FROM pasaje WHERE id_viaje = v_id_viaje AND num_asiento = v_num_asiento) THEN
+SET nomCliente = (SELECT nombre FROM cliente WHERE id = v_id_cliente);
+SET apCliente = (SELECT apellido FROM cliente WHERE id = v_id_cliente);
+SET hr = (SELECT horario FROM viaje WHERE id = v_id_viaje);
 INSERT INTO pasaje VALUES(null, v_id_viaje, v_id_cliente, v_num_asiento, v_ubicacion, v_precio,CURRENT_TIMESTAMP);
-SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nombre,apellido,horario,'success' AS error;
+SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nomCliente as nombre,apCliente as apellido,hr as horario,'success' AS error;
 ELSE
 SELECT 'Error: Número de asiento ya ocupado.' error;
 END IF;
@@ -73,11 +73,26 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pInsertViaje` (IN `v_id_chofer` INT, IN `v_id_bus` INT, IN `v_horario` VARCHAR(30), IN `v_origen` VARCHAR(30), IN `v_destino` VARCHAR(30))  BEGIN
 DECLARE nameChofer varchar(50);
+DECLARE apellidoChofer varchar(50);
 DECLARE numBus varchar(10);
 SET nameChofer = (SELECT nombre FROM chofer WHERE id = v_id_chofer);
+SET apellidoChofer = (SELECT apellido FROM chofer WHERE id = v_id_chofer);
 SET numBus = (SELECT num FROM bus WHERE id = v_id_bus);
 INSERT INTO viaje VALUES(null,v_id_chofer,v_id_bus,v_horario,v_origen,v_destino,CURRENT_TIMESTAMP);
-SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nameChofer,numBus,'success' AS error;
+SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nameChofer,apellidoChofer,numBus,'success' AS error;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `pReporte` (IN `v_fecha` DATE)  BEGIN
+IF EXISTS(SELECT id FROM pasaje WHERE SUBSTRING(fecha,1,10) LIKE v_fecha) THEN
+SELECT p.id,p.num_asiento,p.ubicacion,p.precio,p.fecha,v.horario,
+v.origen,v.destino,ch.ci AS ci_chofer,ch.nombre AS nombre_chofer,ch.img AS img_chofer,b.num AS num_bus,
+cli.ci AS ci_cliente,cli.nombre AS nombre_cliente,cli.apellido AS apellido_cliente 
+FROM bus as b,chofer as ch,viaje as v,cliente as cli,pasaje as p 
+WHERE v.id_chofer=ch.id AND v.id_bus=b.id AND p.id_viaje=v.id AND p.id_cliente=cli.id AND 
+p.fecha > CONCAT(v_fecha,' ','00:00:01') AND p.fecha < CONCAT(v_fecha,' ','23:59:59');
+ELSE
+SELECT 'No se encontraron ventas en esa fecha' error;
+END IF;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pSession` (IN `v_correo` VARCHAR(100), IN `v_pwd` VARCHAR(100))  BEGIN
@@ -119,9 +134,10 @@ CREATE TABLE `bus` (
 --
 
 INSERT INTO `bus` (`id`, `placa`, `marca`, `num`, `color`, `capacidad`, `tipo`, `img`, `fecha`) VALUES
-(1, 'placa-A1', 'Marca 1', 'bus-1', 'negro', 60, 'bus cama', 'andes_bus.jpeg', '2016-11-24 04:47:12'),
-(3, 'placa-A2', 'marca 2', 'num-2', 'rojo', 64, 'semi', '1479979010.jpeg', '2016-11-24 05:16:50'),
-(4, 'asdfRRRR', 'asdfRRR', 'asdfRRR', 'asdfRRR', 12346599, 'normal', '1479979100.jpeg', '2016-11-24 05:18:20');
+(5, '2345ZPL', 'MERCEDES-BENZ', 'Num-001', 'Rojo', 46, 'semi', '1481001195.jpeg', '2016-12-06 01:13:15'),
+(6, '7854JDW', 'SETRA', 'Num-002', 'Azul', 46, 'cama', '1481001247.jpeg', '2016-12-06 01:14:07'),
+(7, '4589ABC', 'MERCEDES-BENZ', 'Num-003', 'Azul', 46, 'normal', '1481001302.jpeg', '2016-12-06 01:15:02'),
+(8, '1254XYZ', 'MERCEDES-BENZ', 'Num-004', 'Negro', 46, 'cama', '1481001341.jpeg', '2016-12-06 01:15:41');
 
 -- --------------------------------------------------------
 
@@ -147,8 +163,9 @@ CREATE TABLE `chofer` (
 --
 
 INSERT INTO `chofer` (`id`, `ci`, `nombre`, `apellido`, `categoria`, `descripcion`, `celular`, `fecha_nac`, `img`, `fecha`) VALUES
-(5, 'bbb', 'bbb', 'bbb', 'cat-C', 'bbbb', 1111, '2016-11-09', '1479696488.jpeg', '2016-11-20 22:48:08'),
-(6, '10917752', 'Pedro', 'Fernandez', 'cat-C', 'Con 20 años de experiencia y dos choques', 75784221, '1995-11-08', '1479697043.png', '2016-11-20 22:57:23');
+(7, '10215548', 'Marco Antonio', 'Pardo Vacaflor', 'cat-C', 'Con 10 de experiencia, sin antecedentes policiales.', 75784522, '1982-05-13', '1481000000.jpeg', '2016-12-06 00:53:20'),
+(8, '20154478', 'Miguel Angel', 'Arteaga Zenteno', 'cat-C', 'Con 15 años de experiencia, sin antecedentes policiales, con un choque.', 73006588, '1981-05-07', '1481000476.jpeg', '2016-12-06 01:01:16'),
+(9, '40916623', 'Nils', 'Pillco Valverde', 'cat-B', 'Con 5 años de experiencia, y un antecedente por conducir ebrio', 75002144, '1990-09-11', '1481000933.jpeg', '2016-12-06 01:08:53');
 
 -- --------------------------------------------------------
 
@@ -170,10 +187,11 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id`, `ci`, `nombre`, `apellido`, `fecha_nac`, `fecha`) VALUES
-(1, '60215548', 'nombre cliente 1', 'apellido cliente 1', '1992-11-05', '2016-11-24 17:22:25'),
-(2, '20845512', 'nombre cliente 2', 'apellido cliente 2', '1994-05-06', '2016-11-24 17:30:33'),
-(3, '30625584', 'nombre cliente 3', 'apellido cliente 3', '2005-03-16', '2016-11-24 17:31:35'),
-(8, '1010101010', 'nombre cliente 4', 'apellido cliente 4', '2016-11-16', '2016-11-24 17:38:40');
+(9, '20548841', 'Mayer', 'Ortiz Espada', '1993-04-07', '2016-12-06 01:29:40'),
+(10, '10514485', 'Marcela', 'Ferrufino Ferreira', '1994-02-09', '2016-12-06 01:31:33'),
+(11, '306245123', 'Richard', 'Vaca Ruiz', '1987-07-16', '2016-12-06 01:32:29'),
+(12, '80452135', 'Yanina', 'Cardozo Salas', '1993-04-16', '2016-12-06 01:34:00'),
+(13, '10215563', 'Paola Andrea', 'Yucra Ortiz', '1995-07-12', '2016-12-06 01:44:37');
 
 -- --------------------------------------------------------
 
@@ -196,10 +214,11 @@ CREATE TABLE `pasaje` (
 --
 
 INSERT INTO `pasaje` (`id`, `id_viaje`, `id_cliente`, `num_asiento`, `ubicacion`, `precio`, `fecha`) VALUES
-(2, 6, 1, 25, 'pasillo', 80, '2016-11-24 18:32:19'),
-(3, 7, 8, 30, 'pasillo', 50, '2016-11-24 18:48:34'),
-(4, 7, 2, 20, 'ventana', 150, '2016-11-24 18:49:17'),
-(5, 6, 3, 30, 'asdf', 90, '2016-11-24 18:51:05');
+(14, 12, 9, 10, 'ventana', 100, '2016-12-06 01:34:56'),
+(15, 12, 10, 1, 'pasillo', 100, '2016-12-06 01:38:03'),
+(16, 9, 11, 23, 'ventana', 150, '2016-12-06 01:38:27'),
+(17, 9, 12, 17, 'pasillo', 150, '2016-12-06 01:38:56'),
+(18, 15, 13, 26, 'ventana', 120, '2016-12-06 01:45:02');
 
 -- --------------------------------------------------------
 
@@ -222,8 +241,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nombre`, `apellido`, `correo`, `contra`, `tipo`, `fecha`) VALUES
-(1, 'asdf', 'asdf', 'asdfa@adf', 'b686682c584d3bb40e819d7eb67212b9e44ad99b', 'admin', '2016-11-20 23:22:04'),
-(2, 'Prueba', 'Prueba', 'prueba@gmail.com', 'b686682c584d3bb40e819d7eb67212b9e44ad99b', 'admin', '2016-11-24 04:35:28');
+(3, 'Juan', 'Perez', 'juan@gmail.com', 'b686682c584d3bb40e819d7eb67212b9e44ad99b', 'admin', '2016-11-28 15:58:49'),
+(4, 'Pedro', 'Fernandez', 'pedro@gmail.com', 'b686682c584d3bb40e819d7eb67212b9e44ad99b', 'user', '2016-12-01 17:10:05');
 
 -- --------------------------------------------------------
 
@@ -246,8 +265,13 @@ CREATE TABLE `viaje` (
 --
 
 INSERT INTO `viaje` (`id`, `id_chofer`, `id_bus`, `horario`, `origen`, `destino`, `fecha`) VALUES
-(6, 5, 1, 'prueba', 'prueba', 'prueba', '2016-11-24 16:41:30'),
-(7, 6, 3, 'horario', 'origen', 'destino', '2016-11-24 16:42:24');
+(9, 7, 6, 'Lunes - Miercoles y Viernes 16', 'Sucre', 'Cochabamba', '2016-12-06 01:16:37'),
+(10, 7, 6, 'Martes - Juevez y Sábado a las', 'Sucre', 'Santa Cruz', '2016-12-06 01:17:52'),
+(11, 8, 5, 'Lunes - Viernes 11:00am', 'Sucre', 'Potosí', '2016-12-06 01:18:27'),
+(12, 8, 5, 'Sabado a las 07:00', 'Sucre', 'Monteagudo', '2016-12-06 01:19:31'),
+(13, 9, 7, 'Lunes - Martes y Miercoles a l', 'Sucre', 'Oruro', '2016-12-06 01:20:12'),
+(14, 9, 8, 'Juevez - Viernes y Sabado', 'Sucre', 'Villazon', '2016-12-06 01:20:55'),
+(15, 8, 7, 'Sabado y Domingo a las 08:00', 'Sucre', 'Serrano', '2016-12-06 01:28:30');
 
 --
 -- Índices para tablas volcadas
@@ -301,32 +325,32 @@ ALTER TABLE `viaje`
 -- AUTO_INCREMENT de la tabla `bus`
 --
 ALTER TABLE `bus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `chofer`
 --
 ALTER TABLE `chofer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `pasaje`
 --
 ALTER TABLE `pasaje`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `viaje`
 --
 ALTER TABLE `viaje`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- Restricciones para tablas volcadas
 --

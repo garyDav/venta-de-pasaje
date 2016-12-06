@@ -4,8 +4,25 @@
 		function($scope,busService,funcionesService,upload,$location,$routeParams) {
 			$scope.mensaje = '';
 			console.log('Entra a busCtrl');
-			
+		    //$('.parallax').parallax();
+			/*$scope.loadCarousel = function() {
+				$('.carousel').carousel({
+			      dist:0,
+			      shift:0,
+			      padding:20,
+			    });
+			    var obj = busService.query();
+				obj.$promise.then(function(response){
+					response.forEach(function(element,index,array) {
+						$('.carousel').append( '<a class="carousel-item" href=""><img ng-src="material/photos/'+element.img+'" style="height: 280px;"></a>' );
+					});
+				},function(response){
+					console.log(response);
+				});
+			};*/
 			$scope.find = function() {
+			    $(".dropdown-button").dropdown();
+			    $(".button-collapse").sideNav();
 				var obj = busService.query();
 				obj.$promise.then(function(response){
 					response.forEach(function(element,index,array) {
