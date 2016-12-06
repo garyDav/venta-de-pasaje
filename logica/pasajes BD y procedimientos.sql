@@ -164,11 +164,13 @@ CREATE PROCEDURE pInsertViaje (
 )
 BEGIN
 	DECLARE nameChofer varchar(50);
+	DECLARE apellidoChofer varchar(50);
 	DECLARE numBus varchar(10);
 	SET nameChofer = (SELECT nombre FROM chofer WHERE id = v_id_chofer);
+	SET apellidoChofer = (SELECT apellido FROM chofer WHERE id = v_id_chofer);
 	SET numBus = (SELECT num FROM bus WHERE id = v_id_bus);
 	INSERT INTO viaje VALUES(null,v_id_chofer,v_id_bus,v_horario,v_origen,v_destino,CURRENT_TIMESTAMP);
-	SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nameChofer,numBus,'success' AS error;
+	SELECT @@identity AS id,CURRENT_TIMESTAMP AS fecha,nameChofer,apellidoChofer,numBus,'success' AS error;
 END //
 
 DROP PROCEDURE IF EXISTS pInsertPasaje;
@@ -218,7 +220,7 @@ CREATE PROCEDURE pReporte (
 BEGIN
 	IF EXISTS(SELECT id FROM pasaje WHERE SUBSTRING(fecha,1,10) LIKE v_fecha) THEN
 		SELECT p.id,p.num_asiento,p.ubicacion,p.precio,p.fecha,v.horario,
-			v.origen,v.destino,ch.ci AS ci_chofer,ch.nombre AS nombre_chofer,b.num AS num_bus,
+			v.origen,v.destino,ch.ci AS ci_chofer,ch.nombre AS nombre_chofer,ch.img AS img_chofer,b.num AS num_bus,
 			cli.ci AS ci_cliente,cli.nombre AS nombre_cliente,cli.apellido AS apellido_cliente 
 		FROM bus as b,chofer as ch,viaje as v,cliente as cli,pasaje as p 
 		WHERE v.id_chofer=ch.id AND v.id_bus=b.id AND p.id_viaje=v.id AND p.id_cliente=cli.id AND 

@@ -9,7 +9,7 @@
 			$scope.c_admin = false;*/
 
 			$scope.create = function(user) {
-				if(user.tipo == 'pasaje_admin') {
+				if(user.tipo == 'daniel') {
 					user.tipo = 'admin';
 					var usuario = new usuarioService(user);
 				} else {

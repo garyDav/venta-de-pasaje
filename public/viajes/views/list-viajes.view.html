@@ -36,7 +36,7 @@
 							<div class="input-field col s12">
 								<select ng-model="new.id_chofer" >
 									<option value="" disabled selected>Chofer </option>
-									<option ng-repeat="d in dataChofer" value="{{d.id}}">{{d.nombre}} </option>
+									<option ng-repeat="d in dataChofer" value="{{d.id}}">{{d.nombre}} {{d.apellido}} </option>
 								</select>
 							</div>
 							<div class="input-field col s12">
@@ -62,7 +62,7 @@
 									<a class="waves-effect waves-light btn" ng-click="save(new);" ng-disabled="form1.$invalid"><i class="material-icons left">cloud</i>Guardar</a>
 								</div>
 								<div class="col s12 m6">
-									<a class="waves-effect waves-light btn red darken-4" ng-click="cancelar();"><i class="material-icons left">clear_all</i>Cancelar</a>
+									<a class="waves-effect waves-light btn red darken-4" ng-click="cancel();"><i class="material-icons left">clear_all</i>Cancelar</a>
 								</div>
 							</div>
 						</div>
@@ -100,7 +100,7 @@
 							<tbody>
 								<!--<tr ng-repeat="g in garra | orderBy:'nombre':'reverse'">-->
 								<tr ng-repeat="d in data | orderBy:'fecha':'reverse'">
-									<td>{{d.nameChofer}} </td>
+									<td>{{d.nameChofer}} {{d.apellidoChofer}} </td>
 									<td>{{d.numBus}} </td>
 									<td>{{d.horario}} </td>
 									<td>{{d.origen}} </td>

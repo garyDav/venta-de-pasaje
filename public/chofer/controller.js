@@ -59,10 +59,10 @@
 						console.log(newObj);
 					}
 				});
-				
+				$scope.newObj = {};
 			}
 			$scope.cancel = function() {
-				$scope.data = {};
+				$scope.newObj = {};
 			}
 			$scope.delete = function(id) {
 				var remove = confirm('¿Está seguro de eliminar el registro?');

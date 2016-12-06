@@ -42,6 +42,7 @@
 					var newData = {
 						id: response.id,
 						nameChofer: response.nameChofer,
+						apellidoChofer: response.apellidoChofer,
 						numBus: response.numBus,
 						horario: newD.horario,
 						origen: newD.origen,
@@ -58,9 +59,10 @@
 				},function(response) {
 					console.log(response);
 				});
+				$scope.new = {};
 			}
 			$scope.cancel = function() {
-				$scope.data = {};
+				$scope.new = {};
 			}
 			$scope.delete = function(id) {
 				var remove = confirm('¿Está seguro de eliminar el registro?');

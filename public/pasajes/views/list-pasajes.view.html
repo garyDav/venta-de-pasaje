@@ -11,12 +11,201 @@
 		margin: 0;
 		padding: 0;
 	}
+	.asientos {
+		position: absolute;
+		top: 233px;
+		left: 35px;
+	}
+	.asientos label {
+		padding: 12.5px 12px;
+	}
+	.asientos .izquierda .dos {
+		padding: 0 14px 0 0;
+	}
+
+	.asientos1 {
+		position: absolute;
+		top: 215px;
+		left: 133px;
+	}
+	.asientos1 label {
+		padding: 12.5px 12px;
+	}
+	.asientos1 .derecha .dos {
+		padding: 0 14px 0 0;
+	}
+	/*@media (min-width: 600px) and (max-width: 600px) {*/
+	@media (min-width: 990px) {
+		.asientos {
+			position: absolute;
+			top: 230px;
+			left: 33px;
+		}
+		.asientos1 {
+			position: absolute;
+			top: 211px;
+			left: 130px;
+		}
+	}
 </style>
 
 <div style="background: #e9ebee;" class="content z-depth-2" ng-controller="pasajesCtrl" ng-init="find();findCliente();findViaje();">
 	<div class="row">
-		<div class="col l3 m2"></div>
-		<div class="col l6 m8 s12">
+		<div class="col m4 s12">
+			<img src="material/img/asientos.jpeg" class="center-align" style="width:200px;">
+			<div class="asientos">
+				<p class="izquierda">
+					3 <input type="checkbox" class="filled-in" id="3"/>
+					<label for="3"></label>
+					4<input type="checkbox" class="filled-in" id="4"/>
+					<label for="4"></label>
+				</p>
+				<p class="izquierda">
+					7 <input type="checkbox" class="filled-in" id="7"/>
+					<label for="7"></label>
+					8 <input type="checkbox" class="filled-in" id="8"/>
+					<label for="8"></label>
+				</p>
+				<p class="izquierda">
+					11 <input type="checkbox" class="filled-in" id="11"/>
+					<label class="dos" for="11"></label>
+					12 <input type="checkbox" class="filled-in" id="12"/>
+					<label class="dos" for="12"></label>
+				</p>
+				<p class="izquierda">
+					15 <input type="checkbox" class="filled-in" id="15"/>
+					<label class="dos" for="15"></label>
+					16 <input type="checkbox" class="filled-in" id="16"/>
+					<label class="dos" for="16"></label>
+				</p>
+				<p class="izquierda">
+					19 <input type="checkbox" class="filled-in" id="19"/>
+					<label class="dos" for="19"></label>
+					20 <input type="checkbox" class="filled-in" id="20"/>
+					<label class="dos" for="20"></label>
+				</p>
+				<p class="izquierda">
+					23 <input type="checkbox" class="filled-in" id="23"/>
+					<label class="dos" for="23"></label>
+					24 <input type="checkbox" class="filled-in" id="24"/>
+					<label class="dos" for="24"></label>
+				</p>
+				<p class="izquierda">
+					27 <input type="checkbox" class="filled-in" id="27"/>
+					<label class="dos" for="27"></label>
+					28 <input type="checkbox" class="filled-in" id="28"/>
+					<label class="dos" for="28"></label>
+				</p>
+				<p class="izquierda">
+					31 <input type="checkbox" class="filled-in" id="31"/>
+					<label class="dos" for="31"></label>
+					32 <input type="checkbox" class="filled-in" id="32"/>
+					<label class="dos" for="32"></label>
+				</p>
+				<p class="izquierda">
+					35 <input type="checkbox" class="filled-in" id="35"/>
+					<label class="dos" for="35"></label>
+					36 <input type="checkbox" class="filled-in" id="36"/>
+					<label class="dos" for="36"></label>
+				</p>
+				<p class="izquierda">
+					39 <input type="checkbox" class="filled-in" id="39"/>
+					<label class="dos" for="39"></label>
+					40 <input type="checkbox" class="filled-in" id="40"/>
+					<label class="dos" for="40"></label>
+				</p>
+				<p class="izquierda">
+					43 <input type="checkbox" class="filled-in" id="43"/>
+					<label class="dos" for="43"></label>
+					44 <input type="checkbox" class="filled-in" id="44"/>
+					<label class="dos" for="44"></label>
+				</p>
+				<p class="izquierda" style="padding: 3px 0">
+					45 <input type="checkbox" class="filled-in" id="45"/>
+					<label class="dos" for="45"></label>
+					46 <input type="checkbox" class="filled-in" id="46"/>
+					<label class="dos" for="46"></label>
+				</p>
+
+			</div>
+
+
+			<div class="asientos1">
+				<p class="derecha">
+					1 <input type="checkbox" class="filled-in" id="1"/>
+					<label for="1"></label>
+					2<input type="checkbox" class="filled-in" id="2"/>
+					<label for="2"></label>
+				</p>
+				<p class="derecha">
+					5 <input type="checkbox" class="filled-in" id="5"/>
+					<label for="5"></label>
+					6 <input type="checkbox" class="filled-in" id="6"/>
+					<label for="6"></label>
+				</p>
+				<p class="derecha">
+					9 <input type="checkbox" class="filled-in" id="9"/>
+					<label class="dos" for="9"></label>
+					10 <input type="checkbox" class="filled-in" id="10"/>
+					<label class="dos" for="10"></label>
+				</p>
+				<p class="derecha">
+					13 <input type="checkbox" class="filled-in" id="13"/>
+					<label class="dos" for="13"></label>
+					14 <input type="checkbox" class="filled-in" id="14"/>
+					<label class="dos" for="14"></label>
+				</p>
+				<p class="derecha">
+					17 <input type="checkbox" class="filled-in" id="17"/>
+					<label class="dos" for="17"></label>
+					18 <input type="checkbox" class="filled-in" id="18"/>
+					<label class="dos" for="18"></label>
+				</p>
+				<p class="derecha">
+					21 <input type="checkbox" class="filled-in" id="21"/>
+					<label class="dos" for="21"></label>
+					22 <input type="checkbox" class="filled-in" id="22"/>
+					<label class="dos" for="22"></label>
+				</p>
+				<p class="derecha">
+					25 <input type="checkbox" class="filled-in" id="25"/>
+					<label class="dos" for="25"></label>
+					26 <input type="checkbox" class="filled-in" id="26"/>
+					<label class="dos" for="26"></label>
+				</p>
+				<p class="derecha">
+					29 <input type="checkbox" class="filled-in" id="29"/>
+					<label class="dos" for="29"></label>
+					30 <input type="checkbox" class="filled-in" id="30"/>
+					<label class="dos" for="30"></label>
+				</p>
+				<p class="derecha">
+					33 <input type="checkbox" class="filled-in" id="33"/>
+					<label class="dos" for="33"></label>
+					34 <input type="checkbox" class="filled-in" id="34"/>
+					<label class="dos" for="34"></label>
+				</p>
+				<p class="derecha">
+					37 <input type="checkbox" class="filled-in" id="37"/>
+					<label class="dos" for="37"></label>
+					38 <input type="checkbox" class="filled-in" id="38"/>
+					<label class="dos" for="38"></label>
+				</p>
+				<p class="derecha">
+					41 <input type="checkbox" class="filled-in" id="41"/>
+					<label class="dos" for="41"></label>
+					42 <input type="checkbox" class="filled-in" id="42"/>
+					<label class="dos" for="42"></label>
+				</p>
+
+			</div>
+
+			
+
+
+
+		</div>
+		<div class="col m8 s12">
 			<div class="card-panel">
 				<div class="row">
 					<div class="row" ng-show="mensaje">
@@ -40,22 +229,34 @@
 								</select>
 							</div>
 							<div class="input-field col s12">
-								<select ng-model="new.id_viaje" >
+								<select ng-model="new.id_viaje" ng-change="cambioViaje(new.id_viaje)">
 									<option value="" disabled selected>Viaje </option>
-									<option ng-repeat="d in dataViaje" value="{{d.id}}">{{d.horario}} </option>
+									<option ng-repeat="d in dataViaje" value="{{d.id}}">{{d.horario}}: {{d.origen}}-{{d.destino}} </option>
 								</select>
 							</div>
 							<div class="input-field col s12">
 								<input id="horario" type="number" class="validate" ng-model="new.num_asiento" required>
 								<label for="horario">Número de asiento </label>
 							</div>
-							<div class="input-field col s12">
+							<!--<div class="input-field col s12">
 								<input id="origen" type="text" class="validate" ng-model="new.ubicacion" required>
 								<label for="origen">Ubicación </label>
-							</div>
+							</div>-->
 							<div class="input-field col s12">
-								<input id="destino" type="number" class="validate" ng-model="new.precio" required>
-								<label for="destino">Precio </label>
+								<select id="ubicacion" ng-model="new.ubicacion">
+									<option value="" disabled selected>Ubicacion </option>
+									<option value="pasillo">Pasillo </option>
+									<option value="ventana">Ventana </option>
+								</select>
+							</div>
+							<div class="row">
+								<div class="input-field col s3">
+									<input id="destino" type="number" class="validate" ng-model="new.precio" required>
+									<label for="destino">Precio </label>
+								</div>
+								<div class="col s3" style="background: #e9ebee;">
+									<br><p>Bs.-</p>
+								</div>
 							</div>
 							<div class="row center">
 								<div class="col s12 m6">
@@ -70,7 +271,6 @@
 				</div>
 			</div>
 		</div>
-		<div class="col l3 m2"></div>
 	</div>
 
 
@@ -106,7 +306,10 @@
 									<td>{{d.ubicacion}} </td>
 									<td>{{d.precio}} </td>
 									<td>{{d.fecha}} </td>
-									<td><a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(d.id);"><i class="material-icons left">delete</i></a></td>
+									<td>
+										<a class="waves-effect waves-light btn-floating red darken-4" ng-click="delete(d.id);"><i class="material-icons left">delete</i></a>
+										<a class="waves-effect waves-light btn-floating grey darken-3" ng-click="imprimir(d.id);"><i class="material-icons left">print</i></a>
+									</td>
 								</tr>
 							</tbody>
 						</table>

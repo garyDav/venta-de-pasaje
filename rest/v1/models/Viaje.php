@@ -4,7 +4,7 @@ $app->get('/viaje',function() use($app) {
 	try {
 		$conex = getConex();
 
-		$result = $conex->prepare("SELECT v.id,c.nombre as nameChofer,b.num as numBus,v.horario,v.origen,v.destino,v.fecha FROM viaje as v,chofer as c,bus as b WHERE v.id_chofer=c.id AND v.id_bus=b.id;");
+		$result = $conex->prepare("SELECT v.id,c.nombre as nameChofer,c.apellido as apellidoChofer,c.img as imgChofer,b.num as numBus,v.horario,v.origen,v.destino,v.fecha FROM viaje as v,chofer as c,bus as b WHERE v.id_chofer=c.id AND v.id_bus=b.id;");
 		
 		$result->execute();
 		$res = $result->fetchAll(PDO::FETCH_OBJ);

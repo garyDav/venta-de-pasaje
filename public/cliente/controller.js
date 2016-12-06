@@ -33,13 +33,14 @@
 							fecha: funcionesService.timeVerbal(response.fecha)
 						};
 						$scope.mensaje = 'Registro insertado correctamente';
-						$segurocope.data.push(newData);
+						$scope.data.push(newData);
 					} else {
 						$scope.mensaje = response.error;
 					}
 				},function(response) {
 					console.log(response);
 				});
+				$scope.new = {};
 			}
 			$scope.cancel = function() {
 				$scope.new = {};

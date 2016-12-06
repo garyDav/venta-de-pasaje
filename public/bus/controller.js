@@ -64,7 +64,7 @@
 						console.log(newObj);
 					}
 				});
-				
+				$scope.new = {};
 			}
 			$scope.editSave = function(editObj) {
 				var obj = new busService(editObj);
@@ -78,7 +78,7 @@
 				$scope.one_data = {};
 				$location.path('/bus');
 			};
-			$scope.cancelar = function() {
+			$scope.cancel = function() {
 				$scope.new = {};
 			}
 			$scope.delete = function(id) {
